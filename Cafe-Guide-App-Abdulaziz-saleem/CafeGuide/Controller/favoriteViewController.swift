@@ -94,20 +94,20 @@ class favoriteViewController: UIViewController, UICollectionViewDelegate , UICol
   
 
   @IBAction func favourites(_ sender: UIButton) {
-    let index = sender.tag
-    let indexe = arrCafe.firstIndex{$0 === arrFave[index]}
-    
-    if arrCafe[indexe!].isFavorite {
-      arrCafe[indexe!].isFavorite = false
-      sender.tintColor = UIColor(named: "Color-1")
-      arrFave.remove(at: index)
-      collection.reloadData()
-      
-    } else {
-      arrCafe[indexe!].isFavorite = true
-      sender.tintColor = UIColor(named: "like")
-      collection.reloadData()
-    }
+//    let index = sender.tag
+//    let indexe = arrCafe.firstIndex{$0 === arrFave[index]}
+//    
+//    if arrCafe[indexe!].isFavorite {
+//      arrCafe[indexe!].isFavorite = false
+//      sender.tintColor = UIColor(named: "Color-1")
+//      arrFave.remove(at: index)
+//      collection.reloadData()
+//      
+//    } else {
+//      arrCafe[indexe!].isFavorite = true
+//      sender.tintColor = UIColor(named: "like")
+//      collection.reloadData()
+//    }
 
 
   }

@@ -12,8 +12,9 @@ class favoriteDrinkViewController: UIViewController ,  UICollectionViewDelegate 
   var  arrDrink = cafeArray
   var arrDrinkFave : [BestCafe] = [BestCafe]()
   var currentDrink:CafeGuide!
-  var arrDrinkTow : [CafeGuide] = [CafeGuide]()
   
+  var section:Int!
+  var index:Int!
   
   @IBOutlet weak var favoriteCollection: UICollectionView!
   
@@ -29,31 +30,17 @@ class favoriteDrinkViewController: UIViewController ,  UICollectionViewDelegate 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    arrDrink.enumerated().forEach { (index,item) in
-      item.bestCafes.enumerated().forEach { (index1,item1) in
-        if item1.isFavorite {
-          if !arrDrinkTow.contains(item){
-            arrDrinkTow.append(item)
-          }
-          
-          if !arrayFaverote.contains(item.shopName){
-            arrayFaverote.append(item.shopName)
-          }
-          
-          if !arrDrinkFave.contains(item1){
-            arrDrinkFave.append(item1)
-          }
-          
-        } else {
-          
-          if arrDrinkFave.contains(item1){
-            let indexe = arrDrinkFave.firstIndex{$0.nameDrinks == item1.nameDrinks}
-            arrDrinkFave.remove(at: indexe!)
-          }
-          
-        }
+    
+    arrDrinkTow.enumerated().forEach { (index,item) in
+      item.bestCafes.enumerated().forEach { (index2,item2) in
+        
+        if  !arrayBestCafeFaverote.contains(item2.nameDrinks) {
+          arrDrinkTow[index].bestCafes.remove(at: index2)
+      }
+        
       }
     }
+    
     
 //    for shop in arrDrinkTow {
 //      for best in shop.bestCafes {
@@ -72,18 +59,24 @@ class favoriteDrinkViewController: UIViewController ,  UICollectionViewDelegate 
   @IBAction func favoriteButton(_ sender: UIButton) {
     
     let index = sender.tag
+    let section = sender.superview!.tag
     
-    
-    if arrDrinkFave[index].isFavorite {
-      arrDrinkFave[index].isFavorite = false
+    if arrDrinkTow[section].bestCafes[index].isFavorite {
+      arrDrinkTow[section].bestCafes[index].isFavorite = false
       sender.tintColor = UIColor(named: "Color-1")
-      arrDrinkFave.remove(at: index)
+      
+      if let index1 = arrayBestCafeFaverote.firstIndex(of: arrDrinkTow[section].bestCafes[index].nameDrinks) {
+        arrayBestCafeFaverote.remove(at: index1)
+      }
+
+      arrDrinkTow[section].bestCafes.remove(at: index)
+      
+      print("~~ \(section) \(index)")
+      if arrDrinkTow[section].bestCafes.count == 0 {
+        arrDrinkTow.remove(at: section)
+      }
       favoriteCollection.reloadData()
       
-    } else {
-      arrDrinkFave[index].isFavorite = true
-      sender.tintColor = UIColor(named: "like")
-      favoriteCollection.reloadData()
     }
   }
   
@@ -102,6 +95,7 @@ class favoriteDrinkViewController: UIViewController ,  UICollectionViewDelegate 
     
     cell.backgroundColor = .systemGray6
     cell.favoriteDrink.image = cafee.imageDrinks
+    cell.favoriteButten.superview!.tag = indexPath.section
     cell.favoriteButten.tag = indexPath.row
     cell.favoriteName.text = cafee.nameDrinks
 
@@ -140,6 +134,8 @@ class favoriteDrinkViewController: UIViewController ,  UICollectionViewDelegate 
     for shop in arrDrinkTow {
       for best in shop.bestCafes {
         if best == arrDrinkFave[indexPath.row] {
+          section = indexPath.section
+          index = indexPath.row
           currentDrink = shop
 
         }

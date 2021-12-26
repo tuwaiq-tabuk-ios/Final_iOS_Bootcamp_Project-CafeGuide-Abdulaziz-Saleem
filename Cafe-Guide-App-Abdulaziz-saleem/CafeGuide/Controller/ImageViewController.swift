@@ -67,7 +67,6 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
     let annotation = MKPointAnnotation()
         annotation.coordinate = coords
     Location.addAnnotation(annotation)
-    
     Location.mapType = .standard
     //    print("~~ \(String(describing: nameCoffe))")
 //    if nameCoffe == "Canephora" {
@@ -181,10 +180,32 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
   @IBAction func favoriteTapped(_ sender: UIButton) {
     let index = sender.tag
     if arrFhoto.bestCafes[index].isFavorite {
+      
+      if arrayBestCafeFaverote.contains(arrFhoto.bestCafes[index].nameDrinks){
+        if let index1 = arrayBestCafeFaverote.firstIndex(of: arrFhoto.bestCafes[index].nameDrinks) {
+          arrayBestCafeFaverote.remove(at: index1)
+        }
+    }
+      
+      if arrDrinkTow.contains(arrFhoto){
+        if let index1 = arrDrinkTow.firstIndex(of: arrFhoto) {
+          arrDrinkTow.remove(at: index1)
+        }
+      }
+      
       arrFhoto.bestCafes[index].isFavorite = false
       sender.tintColor = UIColor(named: "Color-1")
       coffeeDrinksCollecction.reloadData()
     } else {
+
+      if !arrayBestCafeFaverote.contains(arrFhoto.bestCafes[index].nameDrinks){
+        arrayBestCafeFaverote.append(arrFhoto.bestCafes[index].nameDrinks)
+      }
+      
+      if !arrDrinkTow.contains(arrFhoto){
+        arrDrinkTow.append(arrFhoto)
+      }
+      
       arrFhoto.bestCafes[index].isFavorite = true
       sender.tintColor = UIColor(named: "like")
       coffeeDrinksCollecction.reloadData()

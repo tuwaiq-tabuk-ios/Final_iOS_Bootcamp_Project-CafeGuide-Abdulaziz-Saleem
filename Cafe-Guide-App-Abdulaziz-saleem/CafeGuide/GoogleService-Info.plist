@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>517659843208-4mnmbuiniisa30gq76tqehobo3qdedkv.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.517659843208-4mnmbuiniisa30gq76tqehobo3qdedkv</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDCl8qi2dYMQlOhMipmuhiRTAcK49q9Gxg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>517659843208</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.abdualziz.CafeGuide</string>
+	<key>PROJECT_ID</key>
+	<string>cafeguide-fc7ee</string>
+	<key>STORAGE_BUCKET</key>
+	<string>cafeguide-fc7ee.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:517659843208:ios:8c65623981496a0e359d3d</string>
+</dict>
+</plist>

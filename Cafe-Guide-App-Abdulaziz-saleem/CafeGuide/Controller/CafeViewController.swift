@@ -76,9 +76,11 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//    if (collectionView == collection){
+    if (collectionView == collection){
       return CGSize(width: self.view.frame.width - 25, height: self.view.frame.width * 0.75)
-    
+    }else {
+      return CGSize(width: self.view.frame.width * 0.5, height: self.view.frame.width * 0.3)
+    }
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -96,7 +98,7 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
   func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
 //    performSegue(withIdentifier: "showDeatil", sender: nil)
     currentCoffe = arrCafe[indexPath.row]
-    print("~~ \(String(describing: currentCoffe))")
+//    print("~~ \(String(describing: currentCoffe))")
     return true
   }
 

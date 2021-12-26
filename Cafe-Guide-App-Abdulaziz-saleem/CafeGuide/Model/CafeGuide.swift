@@ -6,21 +6,28 @@
 //
 
 import UIKit
+//import Firebase
+//import FirebaseDatabase
 
 //private var arraye:[] = [
 //]
 
 
-var arrayFaverote:[String] = [String]()
+var arrayShopFaverote:[String] = [String]()
+var arrayBestCafeFaverote:[String] = [String]()
 
-class CafeGuide :Equatable {
+var arrDrinkTow : [CafeGuide] = [CafeGuide]()
+
+
+struct CafeGuide :Equatable {
+  
   static func == (lhs: CafeGuide, rhs: CafeGuide) -> Bool {
     return lhs.photo == rhs.photo
       && lhs.shopName == rhs.shopName
       && lhs.evaluation == rhs.evaluation
       && lhs.description == rhs.description
       && lhs.locationCafe == rhs.locationCafe
-//      && lhs.bestCafes == rhs.bestCafes
+//     && lhs.bestCafes == rhs.bestCafes
       && lhs.imageCafe == rhs.imageCafe
       && lhs.isFavorite == rhs.isFavorite
   }
@@ -39,23 +46,45 @@ class CafeGuide :Equatable {
     return cafeArray
   }
   
-  init(photo:UIImage,
-      shopName:String,
-       evaluation:String,
-       description:String,
-       locationCafe:[CGFloat],
-       bestCafes:[BestCafe],
-       imageCafe:[UIImage],
-       isFavorite:Bool) {
-    self.photo = photo
-    self.shopName = shopName
-    self.evaluation = evaluation
-    self.description = description
-    self.locationCafe = locationCafe
-    self.bestCafes = bestCafes
-    self.imageCafe = imageCafe
-    self.isFavorite = isFavorite
-  }
+//  init(photo:UIImage,
+//      shopName:String,
+//       evaluation:String,
+//       description:String,
+//       locationCafe:[CGFloat],
+//       bestCafes:[BestCafe],
+//       imageCafe:[UIImage],
+//       isFavorite:Bool) {
+//    self.photo = photo
+//    self.shopName = shopName
+//    self.evaluation = evaluation
+//    self.description = description
+//    self.locationCafe = locationCafe
+//    self.bestCafes = bestCafes
+//    self.imageCafe = imageCafe
+//    self.isFavorite = isFavorite
+//
+//
+//  }
+  
+  
+  
+//  init(photo:UIImage,
+//      shopName:String,
+//       evaluation:String,
+//       description:String,
+//       locationCafe:[CGFloat],
+//       bestCafes:[BestCafe],
+//       imageCafe:[UIImage],
+//       isFavorite:Bool) {
+//    self.photo = photo
+//    self.shopName = shopName
+//    self.evaluation = evaluation
+//    self.description = description
+//    self.locationCafe = locationCafe
+//    self.bestCafes = bestCafes
+//    self.imageCafe = imageCafe
+//    self.isFavorite = isFavorite
+//  }
   
 }
 
@@ -99,7 +128,7 @@ class CafeGuide :Equatable {
               UIImage(named: "d7")!,
               UIImage(named: "d5")!
             ],
-            isFavorite: true),
+            isFavorite: false),
   
   
   
