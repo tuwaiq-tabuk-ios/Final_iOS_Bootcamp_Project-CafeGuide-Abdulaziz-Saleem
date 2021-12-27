@@ -21,7 +21,6 @@
 		8E21C4FC276F26B600225A0B /* favoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E21C4FB276F26B600225A0B /* favoriteViewController.swift */; };
 		8E7D99EA2768ED8400F599F5 /* BestCafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7D99E92768ED8400F599F5 /* BestCafe.swift */; };
 		8E90A92F2770ACF80081CD83 /* CollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E90A92E2770ACF80081CD83 /* CollectionReusableView.swift */; };
-		8E9B9FCC27749397006C65D4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B9FCB27749397006C65D4 /* MainViewController.swift */; };
 		8ECFB37F2773141D00E9251C /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECFB37E2773141D00E9251C /* DataViewController.swift */; };
 		8ECFB3822773160F00E9251C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8ECFB3802773156D00E9251C /* GoogleService-Info.plist */; };
 		8ED2CD57276F88F600CFBBEA /* favoriteDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED2CD56276F88F600CFBBEA /* favoriteDrinkViewController.swift */; };
@@ -51,7 +50,6 @@
 		8E21C4FB276F26B600225A0B /* favoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favoriteViewController.swift; sourceTree = "<group>"; };
 		8E7D99E92768ED8400F599F5 /* BestCafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestCafe.swift; sourceTree = "<group>"; };
 		8E90A92E2770ACF80081CD83 /* CollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableView.swift; sourceTree = "<group>"; };
-		8E9B9FCB27749397006C65D4 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8ECFB37E2773141D00E9251C /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		8ECFB3802773156D00E9251C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8ED2CD56276F88F600CFBBEA /* favoriteDrinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favoriteDrinkViewController.swift; sourceTree = "<group>"; };
@@ -127,7 +125,6 @@
 				8ED2CD56276F88F600CFBBEA /* favoriteDrinkViewController.swift */,
 				8E0968A027744EF800A19D0A /* LoginViewController.swift */,
 				8ED703C8277455EC00DC9DF7 /* SignUpViewController.swift */,
-				8E9B9FCB27749397006C65D4 /* MainViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -301,7 +298,6 @@
 				8E0B833C275F428700396E32 /* AppDelegate.swift in Sources */,
 				8E0968A127744EF800A19D0A /* LoginViewController.swift in Sources */,
 				8E0B833E275F428700396E32 /* SceneDelegate.swift in Sources */,
-				8E9B9FCC27749397006C65D4 /* MainViewController.swift in Sources */,
 				8EEC3C5D2768D2D6000011CF /* CoffeeDrinksCollectionViewCell.swift in Sources */,
 				8E21C4FC276F26B600225A0B /* favoriteViewController.swift in Sources */,
 			);

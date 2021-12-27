@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class favoriteDrinkViewController: UIViewController ,  UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
   
@@ -94,7 +95,7 @@ class favoriteDrinkViewController: UIViewController ,  UICollectionViewDelegate 
     let cafee = arrDrinkTow[indexPath.section].bestCafes[indexPath.row]
     
     cell.backgroundColor = .systemGray6
-    cell.favoriteDrink.image = cafee.imageDrinks
+    cell.favoriteDrink.sd_setImage(with: URL(string: cafee.imageDrinks), placeholderImage: UIImage(named: ""))
     cell.favoriteButten.superview!.tag = indexPath.section
     cell.favoriteButten.tag = indexPath.row
     cell.favoriteName.text = cafee.nameDrinks

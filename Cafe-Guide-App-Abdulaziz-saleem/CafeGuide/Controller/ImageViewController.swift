@@ -116,14 +116,14 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
     if (collectionView == photoCollecction ){
     
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCollectionCell
-    cell.imageCafe.image = arrFhoto.imageCafe[indexPath.row]
+    cell.imageCafe.sd_setImage(with: URL(string: arrFhoto.imageCafe[indexPath.row]), placeholderImage: UIImage(named: ""))
 
     return cell
     } else {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bestCafe", for: indexPath) as! CoffeeDrinksCollectionViewCell
       
       let best = arrFhoto.bestCafes[indexPath.row]
-      cell.coffeeDrinks.image = best.imageDrinks
+      cell.coffeeDrinks.sd_setImage(with: URL(string: best.imageDrinks), placeholderImage: UIImage(named: ""))
       cell.nameDrinks.text = best.nameDrinks
       cell.favoriteDrinke.tag = indexPath.row
       
@@ -215,7 +215,13 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
   }
 
 
-
+  @IBAction func instagramButton(_ sender: Any) {
+   
+    UIApplication.shared.open(URL(string: arrFhoto.instagram)!, completionHandler: nil)
+    
+    
+  }
+  
 }
     
 

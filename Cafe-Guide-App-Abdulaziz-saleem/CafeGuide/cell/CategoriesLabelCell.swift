@@ -9,7 +9,8 @@ import UIKit
 
 class CategoriesLabelCell: UICollectionViewCell {
  
-  @IBOutlet weak var categoriesButton: UIButton!
+
   
+  @IBOutlet weak var categories: UILabel!
   
 }

@@ -53,12 +53,7 @@ class SignUpViewController: UIViewController {
    sigUp()
   }
   
-  @IBAction func iHaveAccount(_ sender: UIButton) {
-//    let storybord =  UIStoryboard(name: "Main", bundle: nil)
-//    let vc = storybord.instantiateViewController(identifier: "login")
-//    vc.modalPresentationStyle = .overFullScreen
-//    present(vc, animated: true)
-  }
+ 
   
   
   func sigUp() {

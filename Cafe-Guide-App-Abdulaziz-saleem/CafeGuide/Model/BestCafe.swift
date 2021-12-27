@@ -96,14 +96,9 @@ import UIKit
 //
 //}
 
-struct BestCafe2 {
-  let nameDrinks:String
-  let imageDrinks:String
-  var isFavorite:Bool!
-}
 struct BestCafe :Equatable {
   let nameDrinks:String
-  let imageDrinks:UIImage
+  let imageDrinks:String
   var isFavorite:Bool!
   
   static func == (lhs: BestCafe, rhs: BestCafe) -> Bool {

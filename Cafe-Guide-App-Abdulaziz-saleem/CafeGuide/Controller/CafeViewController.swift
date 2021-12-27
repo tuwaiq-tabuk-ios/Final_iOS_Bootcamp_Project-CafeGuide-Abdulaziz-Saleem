@@ -6,17 +6,20 @@
 //
 
 import UIKit
+import Firebase
 
 class CafeViewController: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
   
   var arrCafe = cafeArray
+  var specificArray:[CafeGuide] = [CafeGuide]()
+  
   var arrlabel = ["All","Sitting inside","External request"]
   @IBOutlet weak var collection: UICollectionView!
   
   @IBOutlet weak var CategoriesCollection: UICollectionView!
   
   var currentCoffe:CafeGuide!
-  
+  var collectioRf:CollectionReference!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,18 +29,69 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
     CategoriesCollection.delegate = self
     CategoriesCollection.dataSource = self
     
-//    arrCafe.append(CafeGuide(photo: UIImage(named: "Canephora")!, shopName: "Canephora", evaluation: "4.0"))
-//    arrCafe.append(CafeGuide(photo: UIImage(named: "Dose")!, shopName: "Dose", evaluation: "4.5"))
-//    arrCafe.append(CafeGuide(photo: UIImage(named: "North")!, shopName: "North", evaluation: "3.8"))
-//    arrCafe.append(CafeGuide(photo: UIImage(named: "RATIO")!, shopName: "RATIO", evaluation: "4.0"))
     
     
+    let db = Firestore.firestore()
+    
+    collectioRf = db.collection("CafeGuide")
+    
+    
+    getData()
     // Do any additional setup after loading the view.
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     collection.reloadData()
+  }
+  
+  
+  func getData() {
+    collectioRf.getDocuments(completion: { snapshot, error in
+      if error != nil {
+        print("Error get collectioRf \(error?.localizedDescription)")
+      } else {
+        for Document in snapshot!.documents {
+          let data = Document.data()
+          
+//          let data1:Dictionary = data["bestCafes"] as! Dictionary<String, Any>
+          var bestCafe:[BestCafe] = [BestCafe]()
+          bestCafe.removeAll()
+          for best in data["bestCafes"] as! [[String:Any]] {
+            var name:String!
+            var bool:Bool!
+            var image:String!
+            best.forEach { (key: String, value: Any) in
+              if key == "nameDrinks" {
+                name = value as? String
+              } else if key == "imageDrinks" {
+                image = value as? String
+              } else {
+                bool = value as? Bool
+              }
+              
+            }
+            bestCafe.append(BestCafe(nameDrinks: name, imageDrinks: image, isFavorite: bool))
+
+          }
+          
+          cafeArray.append(CafeGuide(photo: data["photo"] as? String,
+                                     shopName: data["shopName"] as? String,
+                                     evaluation: data["evaluation"] as? String,
+                                     description: data["description"] as? String,
+                                     locationCafe: data["locationCafe"] as? Array,
+                                     bestCafes: bestCafe,
+                                     imageCafe: data["imageCafe"] as? [String],
+                                     isFavorite: data["isFavorite"] as? Bool,
+                                     type: data["type"] as? String,
+                                     instagram: data["instagram"] as? String))
+        }
+        self.arrCafe = cafeArray
+        self.collection.reloadData()
+        print("~~ \(cafeArray.count)")
+      }
+    })
+
   }
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     if (collectionView == collection){
@@ -69,7 +123,7 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
       
     } else {
       let cell = CategoriesCollection.dequeueReusableCell(withReuseIdentifier: "categoriescell", for: indexPath) as! CategoriesLabelCell
-      cell.categoriesButton.setTitle(arrlabel[indexPath.row], for: .normal)
+      cell.categories.text = arrlabel[indexPath.row]
       
       return cell
     }
@@ -97,7 +151,32 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
   
   func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
 //    performSegue(withIdentifier: "showDeatil", sender: nil)
+    if collectionView == collection {
     currentCoffe = arrCafe[indexPath.row]
+    } else {
+      let cell = collectionView.cellForItem(at: indexPath) as! CategoriesLabelCell
+      print("dd \(cell.categories.text!)")
+      arrCafe.removeAll()
+      
+      if cell.categories.text == "Sitting inside" {
+        cafeArray.forEach { CafeGuide in
+          if CafeGuide.type == "inside" {
+            arrCafe.append(CafeGuide)
+          }
+        }
+      } else if cell.categories.text == "External request" {
+
+        cafeArray.forEach { CafeGuide in
+          if CafeGuide.type == "outside" {
+            arrCafe.append(CafeGuide)
+          }
+        }
+      } else {
+        arrCafe = cafeArray
+      }
+      
+      collection.reloadData()
+    }
 //    print("~~ \(String(describing: currentCoffe))")
     return true
   }
@@ -115,12 +194,12 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
   @IBAction func favourites(_ sender: UIButton) {
     
     let index = sender.tag
-    if arrCafe[index].isFavorite {
-      arrCafe[index].isFavorite = false
+    if cafeArray[index].isFavorite {
+      cafeArray[index].isFavorite = false
       sender.tintColor = UIColor(named: "Color-1")
       collection.reloadData()
     } else {
-      arrCafe[index].isFavorite = true
+      cafeArray[index].isFavorite = true
       sender.tintColor = UIColor(named: "like")
       collection.reloadData()
     }
