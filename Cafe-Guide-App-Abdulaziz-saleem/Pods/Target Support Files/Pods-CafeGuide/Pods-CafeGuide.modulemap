@@ -1,0 +1,6 @@
+framework module Pods_CafeGuide {
+  umbrella header "Pods-CafeGuide-umbrella.h"
+
+  export *
+  module * { export * }
+}
