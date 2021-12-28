@@ -18,8 +18,11 @@ class CafeCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var favorite: UIButton!
   
 
-  func setupCell(photo:String ,shopName:String ,evaluation:String){
-    imageCafe.sd_setImage(with: URL(string: photo), placeholderImage: UIImage(named: ""))
+  func setupCell(photo:String ,
+                 shopName:String ,
+                 evaluation:String){
+    imageCafe.sd_setImage(with: URL(string: photo),
+                          placeholderImage: UIImage(named: ""))
     nameCafe.text = shopName
     evaluationCafe.text = "\(evaluation)☆"
   }

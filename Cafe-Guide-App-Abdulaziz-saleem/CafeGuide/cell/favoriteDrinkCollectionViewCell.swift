@@ -11,8 +11,9 @@ class favoriteDrinkCollectionViewCell: UICollectionViewCell {
   
   
   @IBOutlet weak var favoriteDrink: UIImageView!
-  @IBOutlet weak var favoriteName: UILabel!
   
+  @IBOutlet weak var favoriteName: UILabel!
+
   @IBOutlet weak var favoriteButten: UIButton!
   
 }

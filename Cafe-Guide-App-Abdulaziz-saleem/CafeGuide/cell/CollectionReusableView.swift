@@ -8,6 +8,7 @@
 import UIKit
 
 class CollectionReusableView: UICollectionReusableView {
+  
   @IBOutlet weak var labelHeder: UILabel!
   
 }

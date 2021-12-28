@@ -14,6 +14,5 @@ class CoffeeDrinksCollectionViewCell: UICollectionViewCell {
   
   @IBOutlet weak var nameDrinks: UILabel!
   
-  
   @IBOutlet weak var favoriteDrinke: UIButton!
 }

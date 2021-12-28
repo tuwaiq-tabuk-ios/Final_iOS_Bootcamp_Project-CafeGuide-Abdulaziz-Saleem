@@ -1,53 +1,39 @@
 //
-//  LoginViewController.swift
+//  mainViewController.swift
 //  CafeGuide
 //
-//  Created by عبدالعزيز البلوي on 19/05/1443 AH.
+//  Created by عبدالعزيز البلوي on 24/05/1443 AH.
 //
 
 import UIKit
-import Firebase
 import FirebaseAuth
 
-class LoginViewController: UIViewController {
+
+class MainViewController: UIViewController {
   
-  
-  
-  @IBOutlet weak var email: UITextField!
-  
-  @IBOutlet weak var password: UITextField!
-  
-  @IBOutlet weak var errorlb: UILabel!
-  
-  
+  @IBOutlet weak var login: UIButton!
+  @IBOutlet weak var signUp: UIButton!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    errorlb.alpha = 0
-    hideKeyboardWhenTappedAround()
     
+    let email = UserDefaults.standard.string(forKey: "email")
+    let password = UserDefaults.standard.string(forKey: "password")
+    
+    if (email != nil || password != nil) {
+      login(emailClear: email!,
+            passwordClear: password!)
+    }
   }
   
-  @IBAction func Login(_ sender: UIButton) {
-    
-    let emailClear = email.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-    let passwordClear = password.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-    login(emailClear: emailClear, passwordClear: passwordClear)
-  }
   
   
-  
-  func login(emailClear:String,
-             passwordClear:String ) {
+  func login(emailClear:String, passwordClear:String ) {
     Auth.auth().signIn(withEmail: emailClear,
                        password: passwordClear,
                        completion:{
       (authResult,error) in
       if error != nil {
-        self.errorlb.alpha = 1
-        self.errorlb.text = error?.localizedDescription
-        
-        
         
       }else{
         UserDefaults.standard.setValue(emailClear,
@@ -68,4 +54,3 @@ class LoginViewController: UIViewController {
     
   }
 }
-

@@ -33,86 +33,101 @@ class favoriteViewController: UIViewController, UICollectionViewDelegate , UICol
   }
   
   
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      return arrFave.count
+  func collectionView(_ collectionView: UICollectionView,
+                      numberOfItemsInSection section: Int) -> Int {
+    return arrFave.count
     
   }
   
   
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-          let cell = collection.dequeueReusableCell(withReuseIdentifier: "CafeGuide", for: indexPath) as! CafeCollectionViewCell
-      let cafee = arrFave[indexPath.row]
-      cell.setupCell(photo: cafee.photo, shopName: cafee.shopName, evaluation: cafee.evaluation)
-      cell.backgroundColor = .systemGray6
-      cell.favorite.tag = indexPath.row
+  func collectionView(_ collectionView: UICollectionView,
+                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collection.dequeueReusableCell(withReuseIdentifier: "CafeGuide",
+                                              for: indexPath) as! CafeCollectionViewCell
+    let cafee = arrFave[indexPath.row]
+    cell.setupCell(photo: cafee.photo,
+                   shopName: cafee.shopName,
+                   evaluation: cafee.evaluation)
+    cell.backgroundColor = .systemGray6
+    cell.favorite.tag = indexPath.row
+    
+    
+    if !cafee.isFavorite {
+      cell.favorite.tintColor = UIColor(named: "Color-1")
       
-      if !cafee.isFavorite {
-        cell.favorite.tintColor = UIColor(named: "Color-1")
-        
-        
-
-
-      }else {
-        cell.favorite.tintColor = UIColor(named: "like")
-      }
       
-      return cell
-      
-      }
-  
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-      return CGSize(width: self.view.frame.width - 25, height: self.view.frame.width * 0.75)
+    }else {
+      cell.favorite.tintColor = UIColor(named: "like")
+    }
+    
+    
+    return cell
     
   }
   
   
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {      return 30
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
+    return CGSize(width: self.view.frame.width - 25,
+                  height: self.view.frame.width * 0.75)
+    
   }
   
   
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 30
+  }
+  
+  
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return 0.1
   }
   
   
-  func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+  func collectionView(_ collectionView: UICollectionView,
+                      shouldSelectItemAt indexPath: IndexPath) -> Bool {
     currentCoffe = arrFave[indexPath.row]
     return true
   }
-
   
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+  
+  override func prepare(for segue: UIStoryboardSegue,
+                        sender: Any?) {
     if segue.identifier == "showDeatil2"{
-    if let vc = segue.destination as? ImageViewController {
-      vc.arrFhoto = currentCoffe
-
-    }
+      if let vc = segue.destination as? ImageViewController {
+        vc.arrFhoto = currentCoffe
+        
+      }
     }
   }
   
-
+  
   @IBAction func favourites(_ sender: UIButton) {
-//    let index = sender.tag
-//    let indexe = arrCafe.firstIndex{$0 === arrFave[index]}
-//    
-//    if arrCafe[indexe!].isFavorite {
-//      arrCafe[indexe!].isFavorite = false
-//      sender.tintColor = UIColor(named: "Color-1")
-//      arrFave.remove(at: index)
-//      collection.reloadData()
-//      
-//    } else {
-//      arrCafe[indexe!].isFavorite = true
-//      sender.tintColor = UIColor(named: "like")
-//      collection.reloadData()
-//    }
-
-
+    //    let index = sender.tag
+    //    let indexe = arrCafe.firstIndex{$0 === arrFave[index]}
+    //
+    //    if arrCafe[indexe!].isFavorite {
+    //      arrCafe[indexe!].isFavorite = false
+    //      sender.tintColor = UIColor(named: "Color-1")
+    //      arrFave.remove(at: index)
+    //      collection.reloadData()
+    //
+    //    } else {
+    //      arrCafe[indexe!].isFavorite = true
+    //      sender.tintColor = UIColor(named: "like")
+    //      collection.reloadData()
+    //    }
+    
+    
   }
-
-
+  
+  
 }
 
 

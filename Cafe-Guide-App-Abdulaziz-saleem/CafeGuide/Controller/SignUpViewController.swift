@@ -10,7 +10,7 @@ import Firebase
 import FirebaseAuth
 
 class SignUpViewController: UIViewController {
-
+  
   @IBOutlet weak var firstName: UITextField!
   
   @IBOutlet weak var lastName: UITextField!
@@ -21,12 +21,12 @@ class SignUpViewController: UIViewController {
   
   @IBOutlet weak var errorlb: UILabel!
   
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      errorlb.alpha = 0
-        // Do any additional setup after loading the view.
-    }
-    
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    errorlb.alpha = 0
+    hideKeyboardWhenTappedAround()
+  }
+  
   @IBAction func signUp(_ sender: UIButton) {
     if email.text?.isEmpty == true {
       errorlb.alpha = 1
@@ -50,10 +50,10 @@ class SignUpViewController: UIViewController {
       return
     }
     
-   sigUp()
+    sigUp()
   }
   
- 
+  
   
   
   func sigUp() {
@@ -61,15 +61,17 @@ class SignUpViewController: UIViewController {
     let lastName = lastName.text!.trimmingCharacters(in: .whitespacesAndNewlines)
     let email = email.text!.trimmingCharacters(in: .whitespacesAndNewlines)
     let password = password.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-   
-    Auth.auth().createUser(withEmail: email, password: password){
+    
+    Auth.auth().createUser(withEmail: email,
+                           password: password){
       (authResult,error) in
       if error != nil {
         self.errorlb.alpha = 1
         self.errorlb.text = error?.localizedDescription
       }else{
         let db = Firestore.firestore()
-        db.collection("users").document(authResult!.user.uid).setData( ["firstName":firstName,"lastName":lastName]){
+        db.collection("users").document(authResult!.user.uid).setData( ["firstName":firstName,
+                                                                        "lastName":lastName]){
           (error) in
           if error != nil {
             self.errorlb.alpha = 1
@@ -84,5 +86,5 @@ class SignUpViewController: UIViewController {
       }
     }
   }
-
+  
 }

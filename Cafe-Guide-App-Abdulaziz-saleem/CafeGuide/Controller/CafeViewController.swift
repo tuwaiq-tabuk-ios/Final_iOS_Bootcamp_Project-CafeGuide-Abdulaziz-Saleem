@@ -71,7 +71,9 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
               }
               
             }
-            bestCafe.append(BestCafe(nameDrinks: name, imageDrinks: image, isFavorite: bool))
+            bestCafe.append(BestCafe(nameDrinks: name,
+                                     imageDrinks: image,
+                                     isFavorite: bool))
 
           }
           
@@ -93,7 +95,8 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
     })
 
   }
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(_ collectionView: UICollectionView,
+                      numberOfItemsInSection section: Int) -> Int {
     if (collectionView == collection){
       return arrCafe.count
     } else {
@@ -103,12 +106,16 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
   }
   
   
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+  func collectionView(_ collectionView: UICollectionView,
+                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
     if (collectionView == collection){
-      let cell = collection.dequeueReusableCell(withReuseIdentifier: "CafeGuide", for: indexPath) as! CafeCollectionViewCell
+      let cell = collection.dequeueReusableCell(withReuseIdentifier: "CafeGuide",
+                                                for: indexPath) as! CafeCollectionViewCell
       let cafee = arrCafe[indexPath.row]
-      cell.setupCell(photo: cafee.photo, shopName: cafee.shopName, evaluation: cafee.evaluation)
+      cell.setupCell(photo: cafee.photo,
+                     shopName: cafee.shopName,
+                     evaluation: cafee.evaluation)
       cell.backgroundColor = .systemGray6
       cell.favorite.tag = indexPath.row
       
@@ -129,15 +136,20 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
     }
   }
   
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      sizeForItemAt indexPath: IndexPath) -> CGSize {
     if (collectionView == collection){
-      return CGSize(width: self.view.frame.width - 25, height: self.view.frame.width * 0.75)
+      return CGSize(width: self.view.frame.width - 25,
+                    height: self.view.frame.width * 0.75)
     }else {
-      return CGSize(width: self.view.frame.width * 0.5, height: self.view.frame.width * 0.3)
+      return CGSize(width: self.view.frame.width * 0.5,
+                    height: self.view.frame.width * 0.3)
     }
   }
   
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     if (collectionView == collection){
       return 30
     }else{
@@ -145,11 +157,13 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
     }
   }
   
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return 0.1
   }
   
-  func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+  func collectionView(_ collectionView: UICollectionView,
+                      shouldSelectItemAt indexPath: IndexPath) -> Bool {
 //    performSegue(withIdentifier: "showDeatil", sender: nil)
     if collectionView == collection {
     currentCoffe = arrCafe[indexPath.row]
