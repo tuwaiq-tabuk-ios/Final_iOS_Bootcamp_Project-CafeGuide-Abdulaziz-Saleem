@@ -745,6 +745,58 @@
             </objects>
             <point key="canvasLocation" x="3334.7826086956525" y="77.678571428571431"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="QoE-cW-nmy">
+            <objects>
+                <viewController id="MRG-Cw-gCp" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="45L-Vv-gw4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="in" translatesAutoresizingMaskIntoConstraints="NO" id="2H0-GM-Y5o">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sna-Lu-MWe">
+                                <rect key="frame" x="20" y="260" width="335" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KNk-J5-Zm3">
+                                <rect key="frame" x="20" y="341" width="335" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ug3-6T-WqL">
+                                <rect key="frame" x="20" y="464" width="335" height="43"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="25"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" name="log"/>
+                                </state>
+                                <connections>
+                                    <action selector="Login:" destination="c9F-YG-rRD" eventType="touchUpInside" id="JgE-Ta-9Xb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="gjh-iZ-xn5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gjh-iZ-xn5" firstAttribute="bottom" secondItem="ug3-6T-WqL" secondAttribute="bottom" constant="160" id="3n0-na-02n"/>
+                            <constraint firstItem="KNk-J5-Zm3" firstAttribute="top" secondItem="Sna-Lu-MWe" secondAttribute="bottom" constant="40" id="5xj-Fp-adM"/>
+                            <constraint firstItem="Sna-Lu-MWe" firstAttribute="top" secondItem="gjh-iZ-xn5" secondAttribute="top" constant="260" id="Blc-ud-xnJ"/>
+                            <constraint firstItem="Sna-Lu-MWe" firstAttribute="leading" secondItem="KNk-J5-Zm3" secondAttribute="leading" id="Dea-zQ-uZa"/>
+                            <constraint firstItem="gjh-iZ-xn5" firstAttribute="trailing" secondItem="Sna-Lu-MWe" secondAttribute="trailing" constant="20" id="MrT-c6-TEG"/>
+                            <constraint firstItem="Sna-Lu-MWe" firstAttribute="leading" secondItem="gjh-iZ-xn5" secondAttribute="leading" constant="20" id="cei-Y9-KPi"/>
+                            <constraint firstItem="Sna-Lu-MWe" firstAttribute="trailing" secondItem="KNk-J5-Zm3" secondAttribute="trailing" id="iP2-nd-QaO"/>
+                            <constraint firstItem="KNk-J5-Zm3" firstAttribute="leading" secondItem="ug3-6T-WqL" secondAttribute="leading" id="imk-II-mAU"/>
+                            <constraint firstItem="KNk-J5-Zm3" firstAttribute="trailing" secondItem="ug3-6T-WqL" secondAttribute="trailing" id="uxM-XI-30y"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WgJ-Pa-tCt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2150" y="78"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="cbi-ms-Jtw">
             <objects>
@@ -856,14 +908,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Gx-Gv-X8Q">
-                                <rect key="frame" x="20" y="351" width="335" height="43"/>
+                                <rect key="frame" x="20" y="296" width="335" height="43"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfI-7Q-aFn">
-                                <rect key="frame" x="20" y="485" width="335" height="49"/>
+                                <rect key="frame" x="20" y="430" width="335" height="49"/>
                                 <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="26"/>
-                                <state key="normal" title="Done">
+                                <state key="normal" title="OK">
                                     <color key="titleColor" name="log"/>
                                 </state>
                                 <connections>
@@ -881,7 +933,7 @@
                             <constraint firstItem="w3E-js-XtM" firstAttribute="top" secondItem="LKK-ku-gTt" secondAttribute="top" id="Pgh-cR-w7h"/>
                             <constraint firstItem="6Gx-Gv-X8Q" firstAttribute="leading" secondItem="MIZ-fJ-grt" secondAttribute="leading" constant="20" id="YGu-Rf-GO1"/>
                             <constraint firstItem="w3E-js-XtM" firstAttribute="leading" secondItem="LKK-ku-gTt" secondAttribute="leading" id="Zfu-y4-Lvs"/>
-                            <constraint firstItem="6Gx-Gv-X8Q" firstAttribute="top" secondItem="MIZ-fJ-grt" secondAttribute="top" constant="255" id="kkM-1I-lhY"/>
+                            <constraint firstItem="6Gx-Gv-X8Q" firstAttribute="top" secondItem="MIZ-fJ-grt" secondAttribute="top" constant="200" id="kkM-1I-lhY"/>
                             <constraint firstItem="MIZ-fJ-grt" firstAttribute="trailing" secondItem="pfI-7Q-aFn" secondAttribute="trailing" constant="20" id="r7q-Fr-RKr"/>
                             <constraint firstItem="pfI-7Q-aFn" firstAttribute="leading" secondItem="MIZ-fJ-grt" secondAttribute="leading" constant="20" id="y4G-OY-2kO"/>
                         </constraints>
