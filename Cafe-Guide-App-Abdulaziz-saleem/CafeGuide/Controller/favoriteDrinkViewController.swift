@@ -169,7 +169,7 @@ class favoriteDrinkViewController: UIViewController ,  UICollectionViewDelegate 
   override func prepare(for segue: UIStoryboardSegue,
                         sender: Any?) {
     if let vc = segue.destination as? ImageViewController {
-      vc.arrFhoto = currentDrink
+      vc.arrPhoto = currentDrink
     }
   }
   

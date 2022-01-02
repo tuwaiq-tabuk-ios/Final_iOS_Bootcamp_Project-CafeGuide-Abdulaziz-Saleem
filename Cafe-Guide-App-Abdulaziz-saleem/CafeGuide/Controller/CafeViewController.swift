@@ -36,25 +36,25 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
     collectioRf = db.collection("CafeGuide")
     
     
-    getData()
+//    getData()
     // Do any additional setup after loading the view.
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     collection.reloadData()
+    getData()
   }
   
   
   func getData() {
+    cafeArray.removeAll()
     collectioRf.getDocuments(completion: { snapshot, error in
       if error != nil {
         print("Error get collectioRf \(error?.localizedDescription)")
       } else {
         for Document in snapshot!.documents {
           let data = Document.data()
-          
-//          let data1:Dictionary = data["bestCafes"] as! Dictionary<String, Any>
           var bestCafe:[BestCafe] = [BestCafe]()
           bestCafe.removeAll()
           for best in data["bestCafes"] as! [[String:Any]] {
@@ -77,20 +77,20 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
 
           }
           
-          cafeArray.append(CafeGuide(photo: data["photo"] as? String,
-                                     shopName: data["shopName"] as? String,
-                                     evaluation: data["evaluation"] as? String,
-                                     description: data["description"] as? String,
-                                     locationCafe: data["locationCafe"] as? Array,
+          cafeArray.append(CafeGuide(id: data["id"] as! String,
+                                     photo: data["photo"] as! String,
+                                     shopName: data["shopName"] as! String,
+                                     evaluation: data["evaluation"] as! String,
+                                     description: data["description"] as! String,
+                                     locationCafe: data["locationCafe"] as! Array,
                                      bestCafes: bestCafe,
-                                     imageCafe: data["imageCafe"] as? [String],
-                                     isFavorite: data["isFavorite"] as? Bool,
-                                     type: data["type"] as? String,
-                                     instagram: data["instagram"] as? String))
+                                     imageCafe: data["imageCafe"] as! [String],
+                                     isFavorite: data["isFavorite"] as! Bool,
+                                     type: data["type"] as! String,
+                                     instagram: data["instagram"] as! String))
         }
         self.arrCafe = cafeArray
         self.collection.reloadData()
-        print("~~ \(cafeArray.count)")
       }
     })
 
@@ -164,7 +164,6 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
   
   func collectionView(_ collectionView: UICollectionView,
                       shouldSelectItemAt indexPath: IndexPath) -> Bool {
-//    performSegue(withIdentifier: "showDeatil", sender: nil)
     if collectionView == collection {
     currentCoffe = arrCafe[indexPath.row]
     } else {
@@ -199,7 +198,7 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "showDeatil"{
     if let vc = segue.destination as? ImageViewController {
-      vc.arrFhoto = currentCoffe
+      vc.arrPhoto = currentCoffe
       
     }
     }
@@ -208,21 +207,33 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
   @IBAction func favourites(_ sender: UIButton) {
     
     let index = sender.tag
+    let db = Firestore.firestore()
+
+    
     if cafeArray[index].isFavorite {
       cafeArray[index].isFavorite = false
-      sender.tintColor = UIColor(named: "Color-1")
+      db.collection("CafeGuide").document(cafeArray[index].id).setData(["isFavorite":false], merge: true)
+      db.collection("CafeFavorite").document(cafeArray[index].id).delete()
       collection.reloadData()
     } else {
       cafeArray[index].isFavorite = true
-      sender.tintColor = UIColor(named: "like")
+      db.collection("CafeFavorite").document(cafeArray[index].id).setData([
+        "id":cafeArray[index].id as String,
+      ]) { error in
+
+        if error != nil {
+
+        } else {
+          db.collection("CafeGuide").document(cafeArray[index].id).setData(["isFavorite":true], merge: true)
+        }
+
+      }
+      
       collection.reloadData()
     }
     
 
   }
-  //  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-  //    return UIEdgeInsets(top: 1, left: 2, bottom: 1, right: 2)
-  //  }
   
 }
 

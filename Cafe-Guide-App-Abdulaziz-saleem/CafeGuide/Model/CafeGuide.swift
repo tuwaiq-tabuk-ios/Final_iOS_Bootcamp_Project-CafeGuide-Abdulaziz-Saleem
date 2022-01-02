@@ -19,7 +19,7 @@ var arrayBestCafeFaverote:[String] = [String]()
 var arrDrinkTow : [CafeGuide] = [CafeGuide]()
 
 
-struct CafeGuide :Equatable {
+class CafeGuide :Equatable {
   
   static func == (lhs: CafeGuide, rhs: CafeGuide) -> Bool {
     return lhs.photo == rhs.photo
@@ -32,6 +32,7 @@ struct CafeGuide :Equatable {
       && lhs.isFavorite == rhs.isFavorite
   }
   
+  let id:String!
   let photo:String!
   let shopName:String!
   let evaluation:String!
@@ -70,23 +71,29 @@ struct CafeGuide :Equatable {
   
   
   
-//  init(photo:UIImage,
-//      shopName:String,
-//       evaluation:String,
-//       description:String,
-//       locationCafe:[CGFloat],
-//       bestCafes:[BestCafe],
-//       imageCafe:[UIImage],
-//       isFavorite:Bool) {
-//    self.photo = photo
-//    self.shopName = shopName
-//    self.evaluation = evaluation
-//    self.description = description
-//    self.locationCafe = locationCafe
-//    self.bestCafes = bestCafes
-//    self.imageCafe = imageCafe
-//    self.isFavorite = isFavorite
-//  }
+  init(id:String,
+       photo:String,
+       shopName:String,
+       evaluation:String,
+       description:String,
+       locationCafe:[CGFloat],
+       bestCafes:[BestCafe],
+       imageCafe:[String],
+       isFavorite:Bool,
+       type:String,
+       instagram:String) {
+    self.id = id
+    self.photo = photo
+    self.shopName = shopName
+    self.evaluation = evaluation
+    self.description = description
+    self.locationCafe = locationCafe
+    self.bestCafes = bestCafes
+    self.imageCafe = imageCafe
+    self.isFavorite = isFavorite
+    self.type = type
+    self.instagram = instagram
+  }
   
 }
 

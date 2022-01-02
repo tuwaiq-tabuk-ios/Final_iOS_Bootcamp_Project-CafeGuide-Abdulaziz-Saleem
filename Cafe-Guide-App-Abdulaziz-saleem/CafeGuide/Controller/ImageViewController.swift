@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 import AVFoundation
-
+import Firebase
 
 class ImageViewController: UIViewController , UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout,UIScrollViewDelegate {
   
@@ -23,7 +23,7 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
   @IBOutlet var scrollView: UIScrollView!
   @IBOutlet weak var coffeeDrinksCollecction: UICollectionView!
   
-  var arrFhoto:CafeGuide!
+  var arrPhoto:CafeGuide!
   
   //  var arrCanephora = [UIImage(named: "s5")!,UIImage(named: "s1")!,UIImage(named: "s4")!,UIImage(named: "s2")!,UIImage(named: "s3")!]
   //  var arrDose = [UIImage(named: "d1")!,UIImage(named: "d6")!,UIImage(named: "d3")!,UIImage(named: "d7")!,UIImage(named: "d5")!]
@@ -52,19 +52,19 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
   
   
   @IBAction func reading(_ sender: UIButton) {
-    talk("\(arrFhoto.description!)")
+    talk("\(arrPhoto.description!)")
     
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    descriptionCafe.text = arrFhoto.description
+    descriptionCafe.text = arrPhoto.description
     
-    Location.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: CLLocationDegrees(arrFhoto.locationCafe[0]),
-                                                                         longitude: CLLocationDegrees(arrFhoto.locationCafe[1])), latitudinalMeters: CLLocationDistance(100), longitudinalMeters: CLLocationDistance(100)), animated: true)
-    let coords = CLLocationCoordinate2DMake(CLLocationDegrees(arrFhoto.locationCafe[0]),
-                                            CLLocationDegrees(arrFhoto.locationCafe[1]))
+    Location.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: CLLocationDegrees(arrPhoto.locationCafe[0]),
+                                                                         longitude: CLLocationDegrees(arrPhoto.locationCafe[1])), latitudinalMeters: CLLocationDistance(100), longitudinalMeters: CLLocationDistance(100)), animated: true)
+    let coords = CLLocationCoordinate2DMake(CLLocationDegrees(arrPhoto.locationCafe[0]),
+                                            CLLocationDegrees(arrPhoto.locationCafe[1]))
     
     let annotation = MKPointAnnotation()
     annotation.coordinate = coords
@@ -80,7 +80,7 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
     //    }else if nameCoffe == "RATIO"{
     //      arrFhoto = arrRATIO
     //    }
-    pageControl.numberOfPages = arrFhoto.imageCafe.count
+    pageControl.numberOfPages = arrPhoto.imageCafe.count
     
     startTimer()
     
@@ -100,7 +100,7 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
   
   
   @objc func moveIndex(){
-    if cellindex < arrFhoto.imageCafe.count - 1{
+    if cellindex < arrPhoto.imageCafe.count - 1{
       cellindex += 1
     }else{
       cellindex = 0
@@ -117,9 +117,9 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
     if (collectionView == photoCollecction) {
-      return arrFhoto.imageCafe.count
+      return arrPhoto.imageCafe.count
     }else {
-      return arrFhoto.bestCafes.count
+      return arrPhoto.bestCafes.count
     }
   }
   
@@ -130,7 +130,7 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
       
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell",
                                                     for: indexPath) as! PhotoCollectionCell
-      cell.imageCafe.sd_setImage(with: URL(string: arrFhoto.imageCafe[indexPath.row]),
+      cell.imageCafe.sd_setImage(with: URL(string: arrPhoto.imageCafe[indexPath.row]),
                                  placeholderImage: UIImage(named: ""))
       
       return cell
@@ -138,7 +138,7 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bestCafe",
                                                     for: indexPath) as! CoffeeDrinksCollectionViewCell
       
-      let best = arrFhoto.bestCafes[indexPath.row]
+      let best = arrPhoto.bestCafes[indexPath.row]
       cell.coffeeDrinks.sd_setImage(with: URL(string: best.imageDrinks),
                                     placeholderImage: UIImage(named: ""))
       cell.nameDrinks.text = best.nameDrinks
@@ -202,38 +202,113 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
   
   @IBAction func favoriteTapped(_ sender: UIButton) {
     let index = sender.tag
-    if arrFhoto.bestCafes[index].isFavorite {
-      
-      if arrayBestCafeFaverote.contains(arrFhoto.bestCafes[index].nameDrinks){
-        if let index1 = arrayBestCafeFaverote.firstIndex(of: arrFhoto.bestCafes[index].nameDrinks) {
-          arrayBestCafeFaverote.remove(at: index1)
+    let db = Firestore.firestore()
+
+    
+    
+    if arrPhoto.bestCafes[index].isFavorite {
+      print("~~ \(arrPhoto.bestCafes[index].isFavorite)")
+
+
+      db.collection("CafeGuide").document(arrPhoto.id).getDocument { snapshot, error in
+        if error != nil {
+
+        } else {
+          let data = snapshot!.data()!
+
+          var bestCafe:[[String:Any]] = [[String:Any]]()
+          bestCafe.removeAll()
+          for best in data["bestCafes"] as! [[String:Any]] {
+            var name:String!
+            var bool:Bool!
+            var image:String!
+            best.forEach { (key: String, value: Any) in
+              if key == "nameDrinks" {
+                name = value as? String
+              } else if key == "imageDrinks" {
+                image = value as? String
+              } else {
+                if name == self.arrPhoto.bestCafes[index].nameDrinks {
+                bool = false
+                } else {
+                  bool = value as? Bool
+                }
+              }
+            }
+
+            bestCafe.append(["nameDrinks": name as String,
+                                     "imageDrinks": image as String,
+                                     "isFavorite": bool as Bool])
+
+          }
+
+          db.collection("CafeGuide").document(self.arrPhoto.id).setData(["bestCafes":bestCafe],merge: true)
+
         }
+
+
+
       }
-      
-      
-      if arrDrinkTow.contains(arrFhoto){
-        if let index1 = arrDrinkTow.firstIndex(of: arrFhoto) {
-          arrDrinkTow.remove(at: index1)
-        }
-      }
-      
-      
-      arrFhoto.bestCafes[index].isFavorite = false
+
+      db.collection("BestCafe").document(arrPhoto.id).delete()
+
+
+      arrPhoto.bestCafes[index].isFavorite = false
       sender.tintColor = UIColor(named: "Color-1")
       coffeeDrinksCollecction.reloadData()
     } else {
-      
-      if !arrayBestCafeFaverote.contains(arrFhoto.bestCafes[index].nameDrinks){
-        arrayBestCafeFaverote.append(arrFhoto.bestCafes[index].nameDrinks)
+
+      db.collection("CafeGuide").document(arrPhoto.id).getDocument { snapshot, error in
+        if error != nil {
+
+        } else {
+          let data = snapshot!.data()!
+
+          var bestCafe:[[String:Any]] = [[String:Any]]()
+          bestCafe.removeAll()
+          for best in data["bestCafes"] as! [[String:Any]] {
+            var name:String!
+            var bool:Bool!
+            var image:String!
+            best.forEach { (key: String, value: Any) in
+              if key == "nameDrinks" {
+                name = value as? String
+              } else if key == "imageDrinks" {
+                image = value as? String
+              } else {
+                if name == self.arrPhoto.bestCafes[index].nameDrinks {
+                bool = true
+                } else {
+                  bool = value as? Bool
+                }
+              }
+            }
+
+            bestCafe.append(["nameDrinks": name as String,
+                                     "imageDrinks": image as String,
+                                     "isFavorite": bool as Bool])
+           
+
+          }
+          db.collection("CafeGuide").document(self.arrPhoto.id).setData(["bestCafes":bestCafe],merge: true)
+          
+        }
+
+
+
       }
-      
-      
-      if !arrDrinkTow.contains(arrFhoto){
-        arrDrinkTow.append(arrFhoto)
-      }
-      
-      
-      arrFhoto.bestCafes[index].isFavorite = true
+      let id = db.collection("BestCafe").document(self.arrPhoto.id)
+      id.setData([
+        "nameDrinks":self.arrPhoto.bestCafes[index].nameDrinks,
+        "imageDrinks":self.arrPhoto.bestCafes[index].imageDrinks,
+        "id":self.arrPhoto.id as String,
+      ],merge: true)
+
+
+
+
+
+      arrPhoto.bestCafes[index].isFavorite = true
       sender.tintColor = UIColor(named: "like")
       coffeeDrinksCollecction.reloadData()
     }
@@ -244,7 +319,7 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
   
   @IBAction func instagramButton(_ sender: Any) {
     
-    UIApplication.shared.open(URL(string: arrFhoto.instagram)!,
+    UIApplication.shared.open(URL(string: arrPhoto.instagram)!,
                               completionHandler: nil)
     
     
