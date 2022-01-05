@@ -8,7 +8,9 @@
 import UIKit
 
 class AddBestCafeCell: UICollectionViewCell {
-    
+  //MARK: - Outlet
   @IBOutlet weak var bestDrink: UIImageView!
   @IBOutlet weak var nameDrink: UILabel!
+  @IBOutlet weak var deleteDrink: UIButton!
+  
 }

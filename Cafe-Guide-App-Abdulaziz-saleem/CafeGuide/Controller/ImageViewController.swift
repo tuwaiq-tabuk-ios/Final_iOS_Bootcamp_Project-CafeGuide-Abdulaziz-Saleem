@@ -9,13 +9,19 @@ import UIKit
 import MapKit
 import AVFoundation
 import Firebase
+import SDWebImage
 
 class ImageViewController: UIViewController , UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout,UIScrollViewDelegate {
   
+  //MARK: - Properties
   let synthesizer = AVSpeechSynthesizer()
   var player: AVAudioPlayer?
+  var arrPhoto:CafeGuide!
+  var timer : Timer?
+  var cellindex = 0
+  var nameCoffe:String!
   
-  
+  //MARK: - Outlet
   @IBOutlet weak var photoCollecction: UICollectionView!
   @IBOutlet weak var pageControl: UIPageControl!
   @IBOutlet weak var descriptionCafe: UILabel!
@@ -23,30 +29,25 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
   @IBOutlet var scrollView: UIScrollView!
   @IBOutlet weak var coffeeDrinksCollecction: UICollectionView!
   
-  var arrPhoto:CafeGuide!
+
   
   //  var arrCanephora = [UIImage(named: "s5")!,UIImage(named: "s1")!,UIImage(named: "s4")!,UIImage(named: "s2")!,UIImage(named: "s3")!]
   //  var arrDose = [UIImage(named: "d1")!,UIImage(named: "d6")!,UIImage(named: "d3")!,UIImage(named: "d7")!,UIImage(named: "d5")!]
   //  var arrNorth = [UIImage(named: "n1")!,UIImage(named: "n2")!,UIImage(named: "n3")!,UIImage(named: "n4")!,UIImage(named: "n5")!]
   //  var arrRATIO = [UIImage(named: "r1")!,UIImage(named: "r2")!,UIImage(named: "r3")!,UIImage(named: "r4")!,UIImage(named: "r5")!]
   
-  var timer : Timer?
-  var cellindex = 0
-  var nameCoffe:String!
+  
   
   
   @IBOutlet weak var viewDis: UIView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    scrollView.contentSize = CGSize(width: self.view.bounds.size.width, height: self.view.bounds.size.height )
     Location.layer.maskedCorners = [.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
     
     photoCollecction.layer.maskedCorners = [.layerMaxXMinYCorner,.layerMinXMinYCorner]
-    
-    //    print("~~ \(scrollView.subviews.count)")
-    //    photoCollecction.delegate = self
-    //    photoCollecction.dataSource = self
+    coffeeDrinksCollecction.layer.shadowOpacity = 0.5
+   
     // Do any additional setup after loading the view.
   }
   
@@ -142,15 +143,9 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
       cell.coffeeDrinks.sd_setImage(with: URL(string: best.imageDrinks),
                                     placeholderImage: UIImage(named: ""))
       cell.nameDrinks.text = best.nameDrinks
-      cell.favoriteDrinke.tag = indexPath.row
-      
-      if !best.isFavorite {
-        cell.favoriteDrinke.tintColor = UIColor(named: "Color-1")
-      } else {
-        cell.favoriteDrinke.tintColor = UIColor(named: "like")
-      }
       
       
+       
       return cell
     }
     
@@ -200,127 +195,13 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
     }
   }
   
-  @IBAction func favoriteTapped(_ sender: UIButton) {
-    let index = sender.tag
-    let db = Firestore.firestore()
-
-    
-    
-    if arrPhoto.bestCafes[index].isFavorite {
-      print("~~ \(arrPhoto.bestCafes[index].isFavorite)")
-
-
-      db.collection("CafeGuide").document(arrPhoto.id).getDocument { snapshot, error in
-        if error != nil {
-
-        } else {
-          let data = snapshot!.data()!
-
-          var bestCafe:[[String:Any]] = [[String:Any]]()
-          bestCafe.removeAll()
-          for best in data["bestCafes"] as! [[String:Any]] {
-            var name:String!
-            var bool:Bool!
-            var image:String!
-            best.forEach { (key: String, value: Any) in
-              if key == "nameDrinks" {
-                name = value as? String
-              } else if key == "imageDrinks" {
-                image = value as? String
-              } else {
-                if name == self.arrPhoto.bestCafes[index].nameDrinks {
-                bool = false
-                } else {
-                  bool = value as? Bool
-                }
-              }
-            }
-
-            bestCafe.append(["nameDrinks": name as String,
-                                     "imageDrinks": image as String,
-                                     "isFavorite": bool as Bool])
-
-          }
-
-          db.collection("CafeGuide").document(self.arrPhoto.id).setData(["bestCafes":bestCafe],merge: true)
-
-        }
-
-
-
-      }
-
-      db.collection("BestCafe").document(arrPhoto.id).delete()
-
-
-      arrPhoto.bestCafes[index].isFavorite = false
-      sender.tintColor = UIColor(named: "Color-1")
-      coffeeDrinksCollecction.reloadData()
-    } else {
-
-      db.collection("CafeGuide").document(arrPhoto.id).getDocument { snapshot, error in
-        if error != nil {
-
-        } else {
-          let data = snapshot!.data()!
-
-          var bestCafe:[[String:Any]] = [[String:Any]]()
-          bestCafe.removeAll()
-          for best in data["bestCafes"] as! [[String:Any]] {
-            var name:String!
-            var bool:Bool!
-            var image:String!
-            best.forEach { (key: String, value: Any) in
-              if key == "nameDrinks" {
-                name = value as? String
-              } else if key == "imageDrinks" {
-                image = value as? String
-              } else {
-                if name == self.arrPhoto.bestCafes[index].nameDrinks {
-                bool = true
-                } else {
-                  bool = value as? Bool
-                }
-              }
-            }
-
-            bestCafe.append(["nameDrinks": name as String,
-                                     "imageDrinks": image as String,
-                                     "isFavorite": bool as Bool])
-           
-
-          }
-          db.collection("CafeGuide").document(self.arrPhoto.id).setData(["bestCafes":bestCafe],merge: true)
-          
-        }
-
-
-
-      }
-      let id = db.collection("BestCafe").document(self.arrPhoto.id)
-      id.setData([
-        "nameDrinks":self.arrPhoto.bestCafes[index].nameDrinks,
-        "imageDrinks":self.arrPhoto.bestCafes[index].imageDrinks,
-        "id":self.arrPhoto.id as String,
-      ],merge: true)
-
-
-
-
-
-      arrPhoto.bestCafes[index].isFavorite = true
-      sender.tintColor = UIColor(named: "like")
-      coffeeDrinksCollecction.reloadData()
-    }
-    
-    
-  }
   
   
-  @IBAction func instagramButton(_ sender: Any) {
+  
+  @IBAction func instagramButton(_ sender: UIButton) {
     
     UIApplication.shared.open(URL(string: arrPhoto.instagram)!,
-                              completionHandler: nil)
+                                 completionHandler: nil)
     
     
   }

@@ -8,10 +8,12 @@
 import UIKit
 
 class EditCollectionViewCell: UICollectionViewCell {
-    
+  //MARK: - Outlet
   @IBOutlet weak var imgCafe: UIImageView!
   @IBOutlet weak var evaluation: UILabel!
   @IBOutlet weak var nameCafe: UILabel!
+  @IBOutlet weak var deleteButton: UIButton!
+  
   
   func setupCell(photo:String ,
                  shopName:String ,

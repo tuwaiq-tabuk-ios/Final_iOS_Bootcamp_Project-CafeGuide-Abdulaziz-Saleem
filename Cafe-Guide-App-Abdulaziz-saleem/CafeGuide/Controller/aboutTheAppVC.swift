@@ -8,7 +8,7 @@
 import UIKit
 
 class aboutTheAppVC: UIViewController {
-  
+  //MARK: - Outlet
   @IBOutlet weak var aboutTheApp: UITextView!
   
   override func viewDidLoad() {

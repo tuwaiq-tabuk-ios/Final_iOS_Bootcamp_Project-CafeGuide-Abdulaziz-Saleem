@@ -8,13 +8,10 @@
 import UIKit
 
 class CafeCollectionViewCell: UICollectionViewCell {
-    
+  //MARK: - Outlet
   @IBOutlet weak var imageCafe: UIImageView!
-  
   @IBOutlet weak var nameCafe: UILabel!
-  
   @IBOutlet weak var evaluationCafe: UILabel!
-  
   @IBOutlet weak var favorite: UIButton!
   
 

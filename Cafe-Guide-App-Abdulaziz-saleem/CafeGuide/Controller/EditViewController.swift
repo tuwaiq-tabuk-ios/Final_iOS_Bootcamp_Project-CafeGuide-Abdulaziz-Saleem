@@ -9,47 +9,108 @@ import UIKit
 import Firebase
 
 class EditViewController: UIViewController , UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout , UISearchBarDelegate{
- 
+  
+  //MARK: - Properties
   var arrCafe = cafeArray
   var collectioRf: CollectionReference!
-  var currentCoffe:CafeGuide!
+  var selectCurrentCoffe:CafeGuide!
+  var filterdata:[CafeGuide]!
  
+ 
+  //MARK: - Outlet
   @IBOutlet weak var collectionCafe: UICollectionView!
-  
   @IBOutlet weak var SearchCafe: UISearchBar!
-  
+  var edit = false
   
     override func viewDidLoad() {
+      
         super.viewDidLoad()
       collectionCafe.delegate = self
       collectionCafe.dataSource = self
-      
+      SearchCafe.delegate = self
       let db = Firestore.firestore()
-      
       collectioRf = db.collection("CafeGuide")
-      getData()
-      
-      
+      collectionCafe.layer.shadowOpacity = 0.9
+      collectionCafe.layer.shadowRadius = 10
+      filterdata = arrCafe
+      hideKeyboardWhenTappedAround()
       // Do any additional setup after loading the view.
     }
+
+  
+  @IBAction func edit(_ sender: UIButton) {
+    edit.toggle()
+    collectionCafe.reloadData()
     
+    
+  }
+  
+  @IBAction func deleatButton(_ sender: UIButton) {
+    
+    let index = sender.tag
+
+   let ind = filterdata.firstIndex(of: filterdata[index])
+  let ind2 = arrCafe.firstIndex(of: filterdata[index])
+
+    let db = Firestore.firestore()
+    
+    db.collection("CafeGuide").document(filterdata[index].id).delete()
+    
+    filterdata.remove(at: ind!)
+    arrCafe.remove(at: ind2!)
+    collectionCafe.reloadData()
+
+//    filterdata
+    
+    
+  }
+  
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return arrCafe.count
+    return filterdata.count
   }
 
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionCafe.dequeueReusableCell(withReuseIdentifier: "CafeGuideEdit",
                                               for: indexPath) as! EditCollectionViewCell
-    let cafee = arrCafe[indexPath.row]
-    cell.setupCell(photo: cafee.photo,
-                   shopName: cafee.shopName,
-                   evaluation: cafee.evaluation)
+    
+    if edit {
+      cell.deleteButton.isHidden = false
+    } else {
+      cell.deleteButton.isHidden = true
+    }
+    
+    if filterdata.count != 0
+        {
+      let cafee = filterdata[indexPath.row]
+      cell.setupCell(photo: cafee.photo,
+                     shopName: cafee.shopName,
+                     evaluation: cafee.evaluation)
+
+      cell.deleteButton.tag = indexPath.row
+        }
+        else{
+          let cafee = arrCafe[indexPath.row]
+          cell.setupCell(photo: cafee.photo,
+                         shopName: cafee.shopName,
+                         evaluation: cafee.evaluation)
+          cell.deleteButton.tag = indexPath.row
+        }
+        return cell
   
     
-    return cell
+    
 }
+   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    
+      filterdata = searchText.isEmpty ? arrCafe : arrCafe.filter {(item : CafeGuide) -> Bool in
+        
+        return item.shopName.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+      }
+    
+      collectionCafe.reloadData()
+    }
   
   
   func collectionView(_ collectionView: UICollectionView,
@@ -65,10 +126,13 @@ class EditViewController: UIViewController , UICollectionViewDelegate , UICollec
     return 30
   }
   
+ 
+  
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     collectionCafe.reloadData()
+    getData()
   }
   
   
@@ -77,6 +141,8 @@ class EditViewController: UIViewController , UICollectionViewDelegate , UICollec
       if error != nil {
         print("Error get collectioRf \(error?.localizedDescription)")
       } else {
+        cafeArray.removeAll()
+        self.arrCafe.removeAll()
         for Document in snapshot!.documents {
           let data = Document.data()
           
@@ -99,7 +165,7 @@ class EditViewController: UIViewController , UICollectionViewDelegate , UICollec
             }
             bestCafe.append(BestCafe(nameDrinks: name,
                                      imageDrinks: image,
-                                     isFavorite: bool))
+                                     isFavorite: false))
 
           }
           
@@ -111,11 +177,12 @@ class EditViewController: UIViewController , UICollectionViewDelegate , UICollec
                                      locationCafe: data["locationCafe"] as! Array,
                                      bestCafes: bestCafe,
                                      imageCafe: data["imageCafe"] as! [String],
-                                     isFavorite: data["isFavorite"] as! Bool,
+                                     isFavorite: false,
                                      type: data["type"] as! String,
                                      instagram: data["instagram"] as! String))
         }
         self.arrCafe = cafeArray
+        self.filterdata = self.arrCafe
         self.collectionCafe.reloadData()
         print("~~ \(cafeArray.count)")
       }
@@ -123,20 +190,27 @@ class EditViewController: UIViewController , UICollectionViewDelegate , UICollec
 
   }
   
-  
-  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-      if(!(searchBar.text?.isEmpty)!){
-          //reload your data source if necessary
-          self.collectionCafe?.reloadData()
-      }
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "showEdit" {
+    if let vc = segue.destination as? AddViewController {
+      vc.currentCoffe = selectCurrentCoffe
+    }
+    }
   }
+  
+  
+  func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+    selectCurrentCoffe = filterdata[indexPath.row]
+    
+    return true
+  }
+//  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//      if(!(searchBar.text?.isEmpty)!){
+//          //reload your data source if necessary
+//          self.collectionCafe?.reloadData()
+//      }
+//  }
 
   
-  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-      if(searchText.isEmpty){
-          //reload your data source if necessary
-          self.collectionCafe?.reloadData()
-      }
   
-}
 }

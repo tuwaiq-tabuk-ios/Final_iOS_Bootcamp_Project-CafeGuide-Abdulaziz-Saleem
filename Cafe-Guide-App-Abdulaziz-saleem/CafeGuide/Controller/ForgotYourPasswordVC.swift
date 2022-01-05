@@ -8,15 +8,16 @@
 import UIKit
 import FirebaseAuth
 class ForgotYourPasswordVC: UIViewController {
-  
+  //MARK: - Outlet
   @IBOutlet weak var email: UITextField!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     hideKeyboardWhenTappedAround()
+    Colors.Design(email)
     
   }
-  
+  //MARK: - Action
   @IBAction func forgotYourPassword(_ sender: UIButton) {
     
     let auth = Auth.auth()

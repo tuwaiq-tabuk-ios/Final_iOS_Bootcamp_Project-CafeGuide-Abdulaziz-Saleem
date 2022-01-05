@@ -11,22 +11,24 @@ import FirebaseAuth
 
 class SignUpViewController: UIViewController {
   
+  //MARK: - Outlet
   @IBOutlet weak var firstName: UITextField!
-  
   @IBOutlet weak var lastName: UITextField!
-  
   @IBOutlet weak var email: UITextField!
-  
   @IBOutlet weak var password: UITextField!
-  
   @IBOutlet weak var errorlb: UILabel!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     errorlb.alpha = 0
     hideKeyboardWhenTappedAround()
+    Colors.Design(firstName)
+    Colors.Design(lastName)
+    Colors.Design(email)
+    Colors.Design(password)
   }
   
+  //MARK: - Action
   @IBAction func signUp(_ sender: UIButton) {
     if email.text?.isEmpty == true {
       errorlb.alpha = 1
@@ -70,8 +72,7 @@ class SignUpViewController: UIViewController {
         self.errorlb.text = error?.localizedDescription
       }else{
         let db = Firestore.firestore()
-        db.collection("users").document(authResult!.user.uid).setData( ["firstName":firstName,
-                                                                        "lastName":lastName]){
+        db.collection("users").document(authResult!.user.uid).setData( ["firstName":firstName,"lastName":lastName,"type":"user"]){
           (error) in
           if error != nil {
             self.errorlb.alpha = 1

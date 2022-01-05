@@ -21,17 +21,15 @@
 		8E21C4FC276F26B600225A0B /* favoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E21C4FB276F26B600225A0B /* favoriteViewController.swift */; };
 		8E28466D27817DB900DCFBA2 /* imageCafeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28466C27817DB900DCFBA2 /* imageCafeCollectionViewCell.swift */; };
 		8E28466F2781980A00DCFBA2 /* AddBestCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28466E2781980A00DCFBA2 /* AddBestCafeCell.swift */; };
-		8E2846712781983900DCFBA2 /* AddBestCafeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2846702781983900DCFBA2 /* AddBestCafeVC.swift */; };
 		8E2990C02779F65900D62650 /* ForgotYourPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2990BF2779F65900D62650 /* ForgotYourPasswordVC.swift */; };
+		8E35F8A2278469EE009675FE /* OwnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E35F8A1278469EE009675FE /* OwnerViewController.swift */; };
+		8E6CBFB92782E67000597B89 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6CBFB82782E67000597B89 /* Colors.swift */; };
 		8E7D99EA2768ED8400F599F5 /* BestCafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7D99E92768ED8400F599F5 /* BestCafe.swift */; };
 		8E90A92F2770ACF80081CD83 /* CollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E90A92E2770ACF80081CD83 /* CollectionReusableView.swift */; };
 		8EAABFE3277DA59800A48C55 /* EditCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAABFE2277DA59800A48C55 /* EditCollectionViewCell.swift */; };
 		8EAABFE5277DA5C300A48C55 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAABFE4277DA5C300A48C55 /* EditViewController.swift */; };
 		8EAABFE7277DD19300A48C55 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAABFE6277DD19300A48C55 /* AddViewController.swift */; };
-		8ECFB37F2773141D00E9251C /* DataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECFB37E2773141D00E9251C /* DataViewController.swift */; };
 		8ECFB3822773160F00E9251C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8ECFB3802773156D00E9251C /* GoogleService-Info.plist */; };
-		8ED2CD57276F88F600CFBBEA /* favoriteDrinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED2CD56276F88F600CFBBEA /* favoriteDrinkViewController.swift */; };
-		8ED2CD59276F893400CFBBEA /* favoriteDrinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED2CD58276F893400CFBBEA /* favoriteDrinkCollectionViewCell.swift */; };
 		8ED703C9277455EC00DC9DF7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED703C8277455EC00DC9DF7 /* SignUpViewController.swift */; };
 		8EEC3C5D2768D2D6000011CF /* CoffeeDrinksCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC3C5C2768D2D6000011CF /* CoffeeDrinksCollectionViewCell.swift */; };
 		8EEE0D272760F14200E541B6 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEE0D262760F14200E541B6 /* ImageViewController.swift */; };
@@ -62,17 +60,15 @@
 		8E21C4FB276F26B600225A0B /* favoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favoriteViewController.swift; sourceTree = "<group>"; };
 		8E28466C27817DB900DCFBA2 /* imageCafeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageCafeCollectionViewCell.swift; sourceTree = "<group>"; };
 		8E28466E2781980A00DCFBA2 /* AddBestCafeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddBestCafeCell.swift; path = CafeGuide/cell/AddBestCafeCell.swift; sourceTree = SOURCE_ROOT; };
-		8E2846702781983900DCFBA2 /* AddBestCafeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBestCafeVC.swift; sourceTree = "<group>"; };
 		8E2990BF2779F65900D62650 /* ForgotYourPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotYourPasswordVC.swift; sourceTree = "<group>"; };
+		8E35F8A1278469EE009675FE /* OwnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerViewController.swift; sourceTree = "<group>"; };
+		8E6CBFB82782E67000597B89 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		8E7D99E92768ED8400F599F5 /* BestCafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BestCafe.swift; sourceTree = "<group>"; };
 		8E90A92E2770ACF80081CD83 /* CollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReusableView.swift; sourceTree = "<group>"; };
 		8EAABFE2277DA59800A48C55 /* EditCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCollectionViewCell.swift; sourceTree = "<group>"; };
 		8EAABFE4277DA5C300A48C55 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		8EAABFE6277DD19300A48C55 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
-		8ECFB37E2773141D00E9251C /* DataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewController.swift; sourceTree = "<group>"; };
 		8ECFB3802773156D00E9251C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8ED2CD56276F88F600CFBBEA /* favoriteDrinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favoriteDrinkViewController.swift; sourceTree = "<group>"; };
-		8ED2CD58276F893400CFBBEA /* favoriteDrinkCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = favoriteDrinkCollectionViewCell.swift; sourceTree = "<group>"; };
 		8ED703C8277455EC00DC9DF7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		8EEC3C5C2768D2D6000011CF /* CoffeeDrinksCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeDrinksCollectionViewCell.swift; sourceTree = "<group>"; };
 		8EEE0D262760F14200E541B6 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
@@ -146,17 +142,16 @@
 				8E0B833F275F428700396E32 /* CafeViewController.swift */,
 				8EEE0D262760F14200E541B6 /* ImageViewController.swift */,
 				8E21C4FB276F26B600225A0B /* favoriteViewController.swift */,
-				8ED2CD56276F88F600CFBBEA /* favoriteDrinkViewController.swift */,
 				8E0968A027744EF800A19D0A /* LoginViewController.swift */,
-				8ED703C8277455EC00DC9DF7 /* SignUpViewController.swift */,
 				8E2990BF2779F65900D62650 /* ForgotYourPasswordVC.swift */,
+				8ED703C8277455EC00DC9DF7 /* SignUpViewController.swift */,
 				8EF4DB44277AE5F500F87290 /* logOutViewController.swift */,
 				8EF4DB48277AFAFF00F87290 /* ModificationViewController.swift */,
 				8EF4DB4A277AFD8F00F87290 /* aboutTheAppVC.swift */,
 				8EF4DB4C277B2DB800F87290 /* MainViewController.swift */,
 				8EAABFE4277DA5C300A48C55 /* EditViewController.swift */,
 				8EAABFE6277DD19300A48C55 /* AddViewController.swift */,
-				8E2846702781983900DCFBA2 /* AddBestCafeVC.swift */,
+				8E35F8A1278469EE009675FE /* OwnerViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -168,7 +163,6 @@
 				8E0B8359275F9D9200396E32 /* PhotoCollectionCell.swift */,
 				8E0B8353275F754300396E32 /* CategoriesLabelCell.swift */,
 				8EEC3C5C2768D2D6000011CF /* CoffeeDrinksCollectionViewCell.swift */,
-				8ED2CD58276F893400CFBBEA /* favoriteDrinkCollectionViewCell.swift */,
 				8E90A92E2770ACF80081CD83 /* CollectionReusableView.swift */,
 				8EAABFE2277DA59800A48C55 /* EditCollectionViewCell.swift */,
 				8E28466C27817DB900DCFBA2 /* imageCafeCollectionViewCell.swift */,
@@ -181,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				8E0B8341275F428700396E32 /* Main.storyboard */,
-				8ECFB37E2773141D00E9251C /* DataViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -192,6 +185,7 @@
 				8E0B8351275F497E00396E32 /* CafeGuide.swift */,
 				8E7D99E92768ED8400F599F5 /* BestCafe.swift */,
 				8EF4DB46277AED2400F87290 /* Extension.swift */,
+				8E6CBFB82782E67000597B89 /* Colors.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -321,15 +315,13 @@
 			files = (
 				8EAABFE5277DA5C300A48C55 /* EditViewController.swift in Sources */,
 				8EEE0D272760F14200E541B6 /* ImageViewController.swift in Sources */,
-				8ED2CD57276F88F600CFBBEA /* favoriteDrinkViewController.swift in Sources */,
 				8E7D99EA2768ED8400F599F5 /* BestCafe.swift in Sources */,
 				8E0B8354275F754300396E32 /* CategoriesLabelCell.swift in Sources */,
+				8E35F8A2278469EE009675FE /* OwnerViewController.swift in Sources */,
 				8EF4DB49277AFAFF00F87290 /* ModificationViewController.swift in Sources */,
 				8E0B8340275F428700396E32 /* CafeViewController.swift in Sources */,
 				8ED703C9277455EC00DC9DF7 /* SignUpViewController.swift in Sources */,
-				8ED2CD59276F893400CFBBEA /* favoriteDrinkCollectionViewCell.swift in Sources */,
 				8E0B835A275F9D9200396E32 /* PhotoCollectionCell.swift in Sources */,
-				8ECFB37F2773141D00E9251C /* DataViewController.swift in Sources */,
 				8E90A92F2770ACF80081CD83 /* CollectionReusableView.swift in Sources */,
 				8E0B8350275F44E800396E32 /* CafeCollectionViewCell.swift in Sources */,
 				8EAABFE3277DA59800A48C55 /* EditCollectionViewCell.swift in Sources */,
@@ -337,13 +329,13 @@
 				8EF4DB45277AE5F500F87290 /* logOutViewController.swift in Sources */,
 				8EF4DB4B277AFD8F00F87290 /* aboutTheAppVC.swift in Sources */,
 				8E0B833C275F428700396E32 /* AppDelegate.swift in Sources */,
-				8E2846712781983900DCFBA2 /* AddBestCafeVC.swift in Sources */,
 				8E28466F2781980A00DCFBA2 /* AddBestCafeCell.swift in Sources */,
 				8E0968A127744EF800A19D0A /* LoginViewController.swift in Sources */,
 				8EF4DB4D277B2DB800F87290 /* MainViewController.swift in Sources */,
 				8EF4DB47277AED2400F87290 /* Extension.swift in Sources */,
 				8E0B833E275F428700396E32 /* SceneDelegate.swift in Sources */,
 				8EEC3C5D2768D2D6000011CF /* CoffeeDrinksCollectionViewCell.swift in Sources */,
+				8E6CBFB92782E67000597B89 /* Colors.swift in Sources */,
 				8E28466D27817DB900DCFBA2 /* imageCafeCollectionViewCell.swift in Sources */,
 				8E21C4FC276F26B600225A0B /* favoriteViewController.swift in Sources */,
 				8EAABFE7277DD19300A48C55 /* AddViewController.swift in Sources */,

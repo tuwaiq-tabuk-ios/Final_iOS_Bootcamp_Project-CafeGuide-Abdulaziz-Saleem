@@ -1,20 +1,30 @@
 //
-//  logOutViewController.swift
+//  OwnerViewController.swift
 //  CafeGuide
 //
-//  Created by عبدالعزيز البلوي on 24/05/1443 AH.
+//  Created by عبدالعزيز البلوي on 01/06/1443 AH.
 //
 
 import UIKit
 import FirebaseAuth
-class logOutViewController: UIViewController {
+class OwnerViewController: UIViewController {
+
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+      
+      
+    }
+  //MARK: - Action
+  @IBAction func app(_ sender: UIButton) {
     
+    let storybord =  UIStoryboard(name: "Main", bundle: nil)
+    let vc = storybord.instantiateViewController(identifier: "Cafe")
+   // vc.modalPresentationStyle = .overFullScreen
+    self.present(vc, animated: true)
   }
   
-  //MARK: - Action
   @IBAction func logOut(_ sender: UIButton) {
     let auth = Auth.auth()
     
@@ -37,6 +47,8 @@ class logOutViewController: UIViewController {
     }
     
   }
-}
+    
+  }
+  
 
 

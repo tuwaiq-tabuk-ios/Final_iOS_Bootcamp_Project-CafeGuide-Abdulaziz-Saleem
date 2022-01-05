@@ -23,8 +23,6 @@ class favoriteViewController: UIViewController, UICollectionViewDelegate , UICol
     super.viewDidLoad()
     collection.delegate = self
     collection.dataSource = self
-    let db = Firestore.firestore()
-    dataCollection = db.collection("CafeFavorite")
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -36,6 +34,9 @@ class favoriteViewController: UIViewController, UICollectionViewDelegate , UICol
   
   func getData()  {
     let db = Firestore.firestore()
+    let auth = Auth.auth().currentUser!
+    dataCollection = db.collection("CafeFavorite")
+
     arrFave.removeAll()
     dataCollection.getDocuments { snapshot, error in
       if error != nil {
@@ -43,14 +44,26 @@ class favoriteViewController: UIViewController, UICollectionViewDelegate , UICol
       } else {
 
         for document in snapshot!.documents {
+          if document.documentID == auth.uid {
           let data = document.data()
           
-          db.collection("CafeGuide").document(data["id"] as! String).getDocument { snapshotData, error in
-            let data = snapshotData!.data()!
+            for (_,values) in data {
+              let value = values as! Array<Any>
+          
+              if value.count == 0 {
+                return
+              }
+              
+          db.collection("CafeGuide").document(value[0] as! String).getDocument { snapshotData, error in
+            let data = snapshotData!.data()
+            
+            if data == nil {
+              return
+            }
             
             var bestCafe:[BestCafe] = [BestCafe]()
             bestCafe.removeAll()
-            for best in data["bestCafes"] as! [[String:Any]] {
+            for best in data!["bestCafes"] as! [[String:Any]] {
               var name:String!
               var bool:Bool!
               var image:String!
@@ -66,28 +79,50 @@ class favoriteViewController: UIViewController, UICollectionViewDelegate , UICol
               }
               bestCafe.append(BestCafe(nameDrinks: name,
                                        imageDrinks: image,
-                                       isFavorite: bool))
+                                       isFavorite: false))
 
             }
             
-            let cafeGuide = CafeGuide(id: data["id"] as! String,
-                                      photo: data["photo"] as! String,
-                                      shopName: data["shopName"] as! String,
-                                      evaluation: data["evaluation"] as! String,
-                                      description: data["description"] as! String,
-                                 locationCafe: data["locationCafe"] as! Array,
-                                 bestCafes: bestCafe,
-                                 imageCafe: data["imageCafe"] as! [String],
-                                 isFavorite: data["isFavorite"] as! Bool,
-                                 type: data["type"] as! String,
-                                 instagram: data["instagram"] as! String)
-            if !self.arrFave.contains(cafeGuide) {
-            self.arrFave.append(cafeGuide)
+            let cafe = CafeGuide(id: data!["id"] as! String,
+                                 photo: data!["photo"] as! String,
+                                 shopName: data!["shopName"] as! String,
+                                        evaluation: data!["evaluation"] as! String,
+                                        description: data!["description"] as! String,
+                                        locationCafe: data!["locationCafe"] as! Array,
+                                        bestCafes: bestCafe,
+                                        imageCafe: data!["imageCafe"] as! [String],
+                                        isFavorite: false,
+                                        type: data!["type"] as! String,
+                                        instagram: data!["instagram"] as! String)
+             
+             for document in snapshot!.documents {
+               if document.documentID == auth.uid {
+                 let dataFav = document.data()
+                 
+                 for (_,values) in dataFav {
+                   let value = values as! Array<Any>
+                   
+                   if value.count == 0 {
+                     
+                   } else {
+                   if value[0] as! String == data!["id"] as! String {
+                     cafe.isFavorite = true
+                   }
+                   }
+                   
+                 }
+                 
+               }
+               
+             }
+            if !self.arrFave.contains(cafe) {
+            self.arrFave.append(cafe)
+           
             }
             self.collection.reloadData()
           }
-
-
+          }
+        }
         }
       
       }
@@ -172,10 +207,10 @@ class favoriteViewController: UIViewController, UICollectionViewDelegate , UICol
   @IBAction func favourites(_ sender: UIButton) {
         let index = sender.tag
         let db = Firestore.firestore()
+    let auth = Auth.auth().currentUser!
 
     arrFave[index].isFavorite = false
-    db.collection("CafeGuide").document(arrFave[index].id).setData(["isFavorite":false], merge: true)
-    db.collection("CafeFavorite").document(arrFave[index].id).delete()
+    db.collection("CafeFavorite").document(auth.uid).setData([arrFave[index].id:FieldValue.arrayRemove([arrFave[index].id])], merge: true)
     arrFave.remove(at: index)
     collection.reloadData()
         }

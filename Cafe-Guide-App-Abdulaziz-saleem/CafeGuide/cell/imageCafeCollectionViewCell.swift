@@ -8,6 +8,7 @@
 import UIKit
 
 class imageCafeCollectionViewCell: UICollectionViewCell {
-    
+  //MARK: - Outlet
   @IBOutlet weak var imageCafee: UIImageView!
+  @IBOutlet weak var deleteImages: UIButton!
 }

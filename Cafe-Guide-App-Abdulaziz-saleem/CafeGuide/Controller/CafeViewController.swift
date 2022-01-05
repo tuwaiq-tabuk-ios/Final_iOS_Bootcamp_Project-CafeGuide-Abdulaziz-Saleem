@@ -8,34 +8,40 @@
 import UIKit
 import Firebase
 
-class CafeViewController: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
+class CafeViewController: UIViewController , UISearchBarDelegate {
   
+  //MARK: - Properties
   var arrCafe = cafeArray
   var specificArray:[CafeGuide] = [CafeGuide]()
-  
+  var selectCurrentCoffe:CafeGuide!
+  var collectioRf:CollectionReference!
   var arrlabel = ["All","Sitting inside","External request"]
+  var filterdata:[CafeGuide]!
+  //MARK: - Outlet
   @IBOutlet weak var collection: UICollectionView!
-  
   @IBOutlet weak var CategoriesCollection: UICollectionView!
   
-  var currentCoffe:CafeGuide!
-  var collectioRf:CollectionReference!
+  @IBOutlet weak var searchCafe: UISearchBar!
+  
+ 
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    hideKeyboardWhenTappedAround()
     collection.delegate = self
     collection.dataSource = self
     CategoriesCollection.delegate = self
     CategoriesCollection.dataSource = self
-    
-    
-    
+    searchCafe.delegate = self
+    filterdata = arrCafe
     let db = Firestore.firestore()
     
     collectioRf = db.collection("CafeGuide")
-    
-    
+    collection.layer.shadowOpacity = 0.9
+    collection.layer.shadowRadius = 10
+    //collection.layer.shadowColor = .init(red: 23, green: 223, blue: 222, alpha: 1)
+    CategoriesCollection.layer.shadowOpacity = 0.5
+  
 //    getData()
     // Do any additional setup after loading the view.
   }
@@ -48,6 +54,8 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
   
   
   func getData() {
+    let db = Firestore.firestore()
+    let auth = Auth.auth().currentUser!
     cafeArray.removeAll()
     collectioRf.getDocuments(completion: { snapshot, error in
       if error != nil {
@@ -59,82 +67,142 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
           bestCafe.removeAll()
           for best in data["bestCafes"] as! [[String:Any]] {
             var name:String!
-            var bool:Bool!
             var image:String!
             best.forEach { (key: String, value: Any) in
               if key == "nameDrinks" {
                 name = value as? String
               } else if key == "imageDrinks" {
                 image = value as? String
-              } else {
-                bool = value as? Bool
               }
               
             }
             bestCafe.append(BestCafe(nameDrinks: name,
                                      imageDrinks: image,
-                                     isFavorite: bool))
+                                     isFavorite: false))
 
           }
           
-          cafeArray.append(CafeGuide(id: data["id"] as! String,
-                                     photo: data["photo"] as! String,
-                                     shopName: data["shopName"] as! String,
-                                     evaluation: data["evaluation"] as! String,
-                                     description: data["description"] as! String,
-                                     locationCafe: data["locationCafe"] as! Array,
-                                     bestCafes: bestCafe,
-                                     imageCafe: data["imageCafe"] as! [String],
-                                     isFavorite: data["isFavorite"] as! Bool,
-                                     type: data["type"] as! String,
-                                     instagram: data["instagram"] as! String))
+          let dataCollection = db.collection("CafeFavorite")
+
+          dataCollection.getDocuments { snapshot, error in
+            if error != nil {
+              
+            } else {
+
+             let cafe = CafeGuide(id: data["id"] as! String,
+                                         photo: data["photo"] as! String,
+                                         shopName: data["shopName"] as! String,
+                                         evaluation: data["evaluation"] as! String,
+                                         description: data["description"] as! String,
+                                         locationCafe: data["locationCafe"] as! Array,
+                                         bestCafes: bestCafe,
+                                         imageCafe: data["imageCafe"] as! [String],
+                                         isFavorite: false,
+                                         type: data["type"] as! String,
+                                         instagram: data["instagram"] as! String)
+              
+              print("~~ \(cafe.id)")
+              for document in snapshot!.documents {
+                if document.documentID == auth.uid {
+                  let dataFav = document.data()
+                  
+                  for (_,values) in dataFav {
+                    let value = values as! Array<Any>
+                    
+                    if value.count == 0 {
+                      
+                    } else {
+                    if value[0] as! String == data["id"] as! String {
+                      cafe.isFavorite = true
+                    }
+                    }
+                  }
+                  
+                }
+                
+              }
+          
+          cafeArray.append(cafe)
         }
         self.arrCafe = cafeArray
+            self.filterdata = self.arrCafe
         self.collection.reloadData()
+      }
+        }
       }
     })
 
   }
+  
+  
+  
+  
+  //MARK: - Action
+  @IBAction func favourites(_ sender: UIButton) {
+    
+    let index = sender.tag
+    let db = Firestore.firestore()
+    let auth = Auth.auth().currentUser!
+    
+    if cafeArray[index].isFavorite {
+      cafeArray[index].isFavorite = false
+//      db.collection("CafeGuide").document(cafeArray[index].id).setData(["isFavorite":false], merge: true)
+      db.collection("CafeFavorite").document(auth.uid).setData([cafeArray[index].id:FieldValue.arrayRemove([cafeArray[index].id])], merge: true)
+      collection.reloadData()
+    } else {
+      cafeArray[index].isFavorite = true
+      db.collection("CafeFavorite").document(auth.uid).setData([
+        cafeArray[index].id:FieldValue.arrayUnion([cafeArray[index].id]),
+      ],merge: true) { error in
+
+        if error != nil {
+
+        } else {
+          db.collection("CafeGuide").document(cafeArray[index].id).setData(["isFavorite":true], merge: true)
+        }
+
+      }
+      
+      collection.reloadData()
+    }
+    
+
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "showDeatil"{
+    if let vc = segue.destination as? ImageViewController {
+      vc.arrPhoto = selectCurrentCoffe
+    //  vc.selectCurrentCoffe = selectCurrentCoffe
+      
+    }
+    }
+  }
+  
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+   
+     filterdata = searchText.isEmpty ? arrCafe : arrCafe.filter {(item : CafeGuide) -> Bool in
+       
+       return item.shopName.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+     }
+   
+     collection.reloadData()
+   }
+}
+//MARK: - UICollectionView
+extension CafeViewController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout{
+  
+  
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
     if (collectionView == collection){
-      return arrCafe.count
+      return filterdata.count
     } else {
       return arrlabel.count
     }
     
   }
   
-  
-  func collectionView(_ collectionView: UICollectionView,
-                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
-    if (collectionView == collection){
-      let cell = collection.dequeueReusableCell(withReuseIdentifier: "CafeGuide",
-                                                for: indexPath) as! CafeCollectionViewCell
-      let cafee = arrCafe[indexPath.row]
-      cell.setupCell(photo: cafee.photo,
-                     shopName: cafee.shopName,
-                     evaluation: cafee.evaluation)
-      cell.backgroundColor = .systemGray6
-      cell.favorite.tag = indexPath.row
-      
-      if !cafee.isFavorite {
-        cell.favorite.tintColor = UIColor(named: "Color-1")
-      } else {
-        cell.favorite.tintColor = UIColor(named: "like")
-      }
-
-      
-      return cell
-      
-    } else {
-      let cell = CategoriesCollection.dequeueReusableCell(withReuseIdentifier: "categoriescell", for: indexPath) as! CategoriesLabelCell
-      cell.categories.text = arrlabel[indexPath.row]
-      
-      return cell
-    }
-  }
   
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
@@ -148,6 +216,8 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
     }
   }
   
+  
+  
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     if (collectionView == collection){
@@ -157,15 +227,17 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
     }
   }
   
+  
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return 0.1
   }
   
+  
   func collectionView(_ collectionView: UICollectionView,
                       shouldSelectItemAt indexPath: IndexPath) -> Bool {
     if collectionView == collection {
-    currentCoffe = arrCafe[indexPath.row]
+      selectCurrentCoffe = arrCafe[indexPath.row]
     } else {
       let cell = collectionView.cellForItem(at: indexPath) as! CategoriesLabelCell
       print("dd \(cell.categories.text!)")
@@ -186,6 +258,7 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
         }
       } else {
         arrCafe = cafeArray
+        filterdata = arrCafe
       }
       
       collection.reloadData()
@@ -193,47 +266,62 @@ class CafeViewController: UIViewController, UICollectionViewDelegate , UICollect
 //    print("~~ \(String(describing: currentCoffe))")
     return true
   }
-
   
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "showDeatil"{
-    if let vc = segue.destination as? ImageViewController {
-      vc.arrPhoto = currentCoffe
-      
-    }
-    }
-  }
   
-  @IBAction func favourites(_ sender: UIButton) {
+  func collectionView(_ collectionView: UICollectionView,
+                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-    let index = sender.tag
-    let db = Firestore.firestore()
-
-    
-    if cafeArray[index].isFavorite {
-      cafeArray[index].isFavorite = false
-      db.collection("CafeGuide").document(cafeArray[index].id).setData(["isFavorite":false], merge: true)
-      db.collection("CafeFavorite").document(cafeArray[index].id).delete()
-      collection.reloadData()
-    } else {
-      cafeArray[index].isFavorite = true
-      db.collection("CafeFavorite").document(cafeArray[index].id).setData([
-        "id":cafeArray[index].id as String,
-      ]) { error in
-
-        if error != nil {
-
+    if (collectionView == collection){
+      let cell = collection.dequeueReusableCell(withReuseIdentifier: "CafeGuide",
+                                                for: indexPath) as! CafeCollectionViewCell
+      if filterdata.count != 0
+          {
+        let cafee = filterdata[indexPath.row]
+        cell.setupCell(photo: cafee.photo,
+                       shopName: cafee.shopName,
+                       evaluation: cafee.evaluation)
+        
+        cell.favorite.tag = indexPath.row
+        if !cafee.isFavorite {
+          cell.favorite.tintColor = UIColor(named: "Color-1")
         } else {
-          db.collection("CafeGuide").document(cafeArray[index].id).setData(["isFavorite":true], merge: true)
+          cell.favorite.tintColor = UIColor(named: "like")
         }
-
-      }
+        
+          }
+          else{
+            let cafee = arrCafe[indexPath.row]
+            cell.setupCell(photo: cafee.photo,
+                           shopName: cafee.shopName,
+                           evaluation: cafee.evaluation)
+            
+            cell.favorite.tag = indexPath.row
+            if !cafee.isFavorite {
+              cell.favorite.tintColor = UIColor(named: "Color-1")
+            } else {
+              cell.favorite.tintColor = UIColor(named: "like")
+            }
+            
+          }
       
-      collection.reloadData()
-    }
-    
+      
+      
+     
 
+      
+      return cell
+      
+    } else {
+      let cell = CategoriesCollection.dequeueReusableCell(withReuseIdentifier: "categoriescell", for: indexPath) as! CategoriesLabelCell
+      cell.categories.text = arrlabel[indexPath.row]
+      
+      return cell
+    }
   }
+  
+  
+  
+  
   
 }
 

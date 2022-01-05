@@ -10,17 +10,15 @@ import FirebaseAuth
 import Firebase
 
 class ModificationViewController: UIViewController {
-  
+  //MARK: - Outlet
   @IBOutlet weak var email: UITextField!
-  
   @IBOutlet weak var firstName: UITextField!
-  
   @IBOutlet weak var lastName: UITextField!
   
     
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    hideKeyboardWhenTappedAround()
     let db = Firestore.firestore()
     if let user = Auth.auth().currentUser{
       let id = user.uid
@@ -40,6 +38,7 @@ class ModificationViewController: UIViewController {
     }
     
   }
+  //MARK: - Action
   @IBAction func save(_ sender: Any) {
     
     let db = Firestore.firestore()
