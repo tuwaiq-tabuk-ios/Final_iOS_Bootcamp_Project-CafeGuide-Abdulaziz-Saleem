@@ -28,8 +28,6 @@ For everyone, especially coffee lovers
 
 ● The user will have a list of favorite Cafes that he/she can controlle.
 
-● The user will have a list of favorite drinks that are chosen from the listed cafes.
-
 ● The user will have 3 options to see the cafes:
   1. See all the cafes.
   2. See the ones that are better for takeout.

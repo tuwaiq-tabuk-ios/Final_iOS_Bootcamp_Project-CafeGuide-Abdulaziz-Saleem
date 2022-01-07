@@ -157,8 +157,8 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
                       layout collectionViewLayout: UICollectionViewLayout,
                       sizeForItemAt indexPath: IndexPath) -> CGSize {
     if (collectionView == photoCollecction){
-      return CGSize(width: self.view.frame.width,
-                    height: self.view.frame.width )
+      return CGSize(width: self.view.frame.width ,
+                    height: self.view.frame.width)
     } else {
       return CGSize(width: coffeeDrinksCollecction.frame.width * 0.48,
                     height: coffeeDrinksCollecction.frame.height * 0.47)
@@ -169,7 +169,7 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     if (collectionView == photoCollecction){
-      return 0
+      return 5
     }else {
       return 20
     }

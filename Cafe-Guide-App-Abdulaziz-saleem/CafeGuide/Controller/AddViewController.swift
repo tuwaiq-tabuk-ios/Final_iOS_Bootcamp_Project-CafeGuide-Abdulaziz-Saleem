@@ -9,14 +9,16 @@ import UIKit
 import PhotosUI
 import Firebase
 import FirebaseAuth
+import SDWebImage
+
 class AddViewController: UIViewController ,
                          UITextFieldDelegate     {
   
   
   //MARK: - Properties
   var arrimg:[UIImage] = []
-  var arrDrink:[[String:Any]] = [[String:Any]]()
-  
+  var arrDrinkImage:[UIImage] = []
+  var arrDrinkName:[String] = []
   var currIndex = 0
   var arrText = ["inside","outside"]
   var pickerType = UIPickerView()
@@ -100,14 +102,16 @@ class AddViewController: UIViewController ,
 //    print("~~ \(currentCoffe.shopName)")
     currentCoffe = nil
     arrimg.removeAll()
-    arrDrink.removeAll()
-    
+   
+    arrDrinkImage.removeAll()
+    arrDrinkName.removeAll()
   }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     if currentCoffe != nil {
     getImages()
+      print("\(currentCoffe.imageCafe.count)")
     }
     
   }
@@ -115,7 +119,8 @@ class AddViewController: UIViewController ,
   func getImages() {
     
     arrimg.removeAll()
-    arrDrink.removeAll()
+    arrDrinkImage.removeAll()
+    arrDrinkName.removeAll()
     for image in currentCoffe.imageCafe {
       print("~~~ \(image)")
 
@@ -131,17 +136,28 @@ class AddViewController: UIViewController ,
     for bestCafe in currentCoffe.bestCafes {
       let imageView = UIImageView()
       imageView.sd_setImage(with: URL(string: bestCafe.imageDrinks)) { image, error, _, _ in
-        self.arrDrink.append(["name" : bestCafe.nameDrinks,"image":image!])
+       // self.arrDrink.append(["name" : bestCafe.nameDrinks,"image":image!])
+        self.arrDrinkName.append(bestCafe.nameDrinks)
+        self.arrDrinkImage.append(image!)
         self.bestCafeCollection.reloadData()
+        
+        print("~~ \n\n")
+        print("~~ \(bestCafe.imageDrinks)")
+        print("~~ \(bestCafe.nameDrinks)")
+        print("~~ \n\n")
+
       }
       
     }
     
   }
   @IBAction func addimageCafe(_ sender: UIButton) {
-    bestCafe = false
-    addFoto()
-  }
+   bestCafe = false
+   addFoto()
+//    for name in self.arrDrinkName {
+//      print("~~ \(name)")
+//    }
+ }
   
   
   @objc func closePicker(){
@@ -152,6 +168,7 @@ class AddViewController: UIViewController ,
   
   @IBAction func add(_ sender: UIButton) {
     getPhotos()
+    
   }
   
   @IBAction func addBestCafe(_ sender: UIButton) {
@@ -172,11 +189,13 @@ class AddViewController: UIViewController ,
     arrimg.remove(at: index)
     imageCollection.reloadData()
   }
+  
   @IBAction func DeleteBestDrink(_ sender:UIButton) {
     
       let index = sender.tag
       
-      arrDrink.remove(at: index)
+    arrDrinkName.remove(at: index)
+    arrDrinkImage.remove(at: index)
     bestCafeCollection.reloadData()
     }
   
@@ -232,6 +251,7 @@ class AddViewController: UIViewController ,
 
           }
         }
+        
 
         var imagesData = [Data]()
         for image in self.arrimg {
@@ -253,7 +273,7 @@ class AddViewController: UIViewController ,
                   print("~~ error get url image: \(error?.localizedDescription)")
                 } else {
                   imageURL.append(url!.absoluteString)
-                  print("~~ \(imageURL)")
+//                  print("~~ \(imageURL)")
                   db.collection("CafeGuide").document(documentID).setData(
                     ["imageCafe":imageURL,
                     ],merge: true)
@@ -266,22 +286,20 @@ class AddViewController: UIViewController ,
         }
 
 
-    var bestImageData = [Data]()
-        var names = [String]()
-        for dictionary in self.arrDrink {
-          for (key,value) in dictionary {
-            if key == "name"{
-              names.append(value as! String)
-            } else {
-              let image = value as! UIImage
-              let data = image.jpegData(compressionQuality: 0.5)
-              bestImageData.append(data!)
-            }
-          }
-        }
+        var bestImageData = [Data]()
+        var names = self.arrDrinkName
 
-        var array = [[String:Any]]()
-        var i = 0
+        for image in self.arrDrinkImage {
+              let data = image.jpegData(compressionQuality: 0.5)
+          bestImageData.append(data!)
+
+        }
+      
+      
+      
+
+      var array = [[String:Any]]()
+      var i = 0
       for image in bestImageData {
         
         
@@ -298,7 +316,10 @@ class AddViewController: UIViewController ,
                 
               } else {
 
-                
+                print("~~ \(names[i])")
+                print("~~ \(url!.absoluteString)")
+                print("~~ \n\n")
+
                 array.append(["nameDrinks":names[i],"imageDrinks":url!.absoluteString])
                 db.collection("CafeGuide").document(documentID).setData(
                   ["bestCafes":array
@@ -375,7 +396,9 @@ extension AddViewController : UIImagePickerControllerDelegate , UINavigationCont
       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
         let textField = alert?.textFields![0]
         
-        self.arrDrink.append(["name":textField?.text!,"image":image])
+        self.arrDrinkName.append(textField!.text!)
+        self.arrDrinkImage.append(image)
+        print("~~\(self.arrDrinkName.count),\(self.arrDrinkImage.count)")
         self.bestCafeCollection.reloadData()
       }))
       
@@ -430,7 +453,7 @@ extension AddViewController: PHPickerViewControllerDelegate{
   func getPhotos(){
     var config = PHPickerConfiguration()
     config.filter = .images
-    config.selectionLimit = 5
+    config.selectionLimit = 8
     
     let phPicker = PHPickerViewController(configuration: config)
     phPicker.delegate = self
@@ -478,7 +501,7 @@ extension AddViewController:UICollectionViewDelegate ,
     if (collectionView == imageCollection ){
       return arrimg.count
     }else {
-      return arrDrink.count
+      return arrDrinkImage.count
     }
   }
   
@@ -493,8 +516,10 @@ extension AddViewController:UICollectionViewDelegate ,
       return cell
     } else {
       let cell = bestCafeCollection.dequeueReusableCell(withReuseIdentifier: "bestDrink",for: indexPath) as! AddBestCafeCell
-      cell.bestDrink.image = arrDrink[indexPath.row]["image"] as! UIImage
-      cell.nameDrink.text = arrDrink[indexPath.row]["name"] as! String
+      
+      cell.bestDrink.image = arrDrinkImage[indexPath.row]
+      cell.bestDrink.tag = indexPath.row
+      cell.nameDrink.text = arrDrinkName[indexPath.row]
       cell.deleteDrink.tag = indexPath.row
       return cell
     }
