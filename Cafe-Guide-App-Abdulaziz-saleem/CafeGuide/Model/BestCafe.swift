@@ -96,7 +96,7 @@ import UIKit
 //
 //}
 
-struct BestCafe :Equatable {
+class BestCafe :Equatable {
   let nameDrinks:String
   let imageDrinks:String
   var isFavorite:Bool!
@@ -109,11 +109,11 @@ struct BestCafe :Equatable {
   
   
   
-//  init(nameDrinks:String,
-//       imageDrinks:UIImage,
-//       isFavorite:Bool) {
-//    self.nameDrinks = nameDrinks
-//    self.imageDrinks = imageDrinks
-//    self.isFavorite = isFavorite
-//  }
+  init(nameDrinks:String,
+       imageDrinks:String,
+       isFavorite:Bool) {
+    self.nameDrinks = nameDrinks
+    self.imageDrinks = imageDrinks
+    self.isFavorite = isFavorite
+  }
 }

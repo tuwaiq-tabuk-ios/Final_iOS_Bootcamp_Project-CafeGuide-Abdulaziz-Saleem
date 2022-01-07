@@ -8,6 +8,6 @@
 import UIKit
 
 class PhotoCollectionCell: UICollectionViewCell {
-  
+  //MARK: - Outlet
   @IBOutlet weak var imageCafe: UIImageView!
 }

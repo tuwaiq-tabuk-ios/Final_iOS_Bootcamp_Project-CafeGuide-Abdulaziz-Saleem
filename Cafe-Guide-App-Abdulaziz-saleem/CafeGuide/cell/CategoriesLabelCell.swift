@@ -10,7 +10,7 @@ import UIKit
 class CategoriesLabelCell: UICollectionViewCell {
  
 
-  
+  //MARK: - Outlet
   @IBOutlet weak var categories: UILabel!
   
 }

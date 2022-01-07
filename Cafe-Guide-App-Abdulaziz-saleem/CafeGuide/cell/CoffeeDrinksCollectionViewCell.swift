@@ -9,11 +9,8 @@ import UIKit
 
 class CoffeeDrinksCollectionViewCell: UICollectionViewCell {
   
-  
+  //MARK: - Outlet
   @IBOutlet weak var coffeeDrinks: UIImageView!
-  
   @IBOutlet weak var nameDrinks: UILabel!
-  
-  
   @IBOutlet weak var favoriteDrinke: UIButton!
 }
