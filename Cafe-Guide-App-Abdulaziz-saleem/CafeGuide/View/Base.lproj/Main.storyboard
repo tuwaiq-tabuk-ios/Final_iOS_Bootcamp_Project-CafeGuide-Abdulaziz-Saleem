@@ -1482,64 +1482,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cdG-GZ-fcr">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="in" translatesAutoresizingMaskIntoConstraints="NO" id="CjD-wD-gK9">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="IMG" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xar-Gn-CcI">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="317"/>
-                                    </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KBA-id-tPm">
-                                        <rect key="frame" x="0.0" y="317" width="375" height="350"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="in" translatesAutoresizingMaskIntoConstraints="NO" id="CjD-wD-gK9">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="350"/>
-                                            </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KNu-9V-PUd">
-                                                <rect key="frame" x="0.0" y="100" width="375" height="43"/>
-                                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="25"/>
-                                                <state key="normal" title="Login">
-                                                    <color key="titleColor" name="log"/>
-                                                </state>
-                                                <connections>
-                                                    <segue destination="c9F-YG-rRD" kind="show" id="cdB-2S-NM0"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7s1-nV-P3T">
-                                                <rect key="frame" x="0.0" y="153" width="375" height="43"/>
-                                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="25"/>
-                                                <state key="normal" title="Don't have an account?">
-                                                    <color key="titleColor" name="log"/>
-                                                </state>
-                                                <connections>
-                                                    <segue destination="iQX-iH-PuV" kind="show" id="Gr8-mA-Yzy"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstItem="KNu-9V-PUd" firstAttribute="leading" secondItem="KBA-id-tPm" secondAttribute="leading" id="8mJ-JM-Ntx"/>
-                                            <constraint firstItem="7s1-nV-P3T" firstAttribute="leading" secondItem="KBA-id-tPm" secondAttribute="leading" id="BAJ-Ti-a8v"/>
-                                            <constraint firstAttribute="trailing" secondItem="7s1-nV-P3T" secondAttribute="trailing" id="DPe-ce-bVF"/>
-                                            <constraint firstAttribute="trailing" secondItem="KNu-9V-PUd" secondAttribute="trailing" id="Hvm-to-rT2"/>
-                                            <constraint firstAttribute="trailing" secondItem="CjD-wD-gK9" secondAttribute="trailing" id="KLm-YX-iKl"/>
-                                            <constraint firstItem="CjD-wD-gK9" firstAttribute="leading" secondItem="KBA-id-tPm" secondAttribute="leading" id="V3J-cB-fdE"/>
-                                            <constraint firstItem="CjD-wD-gK9" firstAttribute="top" secondItem="KBA-id-tPm" secondAttribute="top" id="aYK-Yt-JoN"/>
-                                            <constraint firstAttribute="height" constant="350" id="fLL-qV-4iJ"/>
-                                            <constraint firstItem="7s1-nV-P3T" firstAttribute="top" secondItem="KNu-9V-PUd" secondAttribute="bottom" constant="10" id="hrS-hO-ggw"/>
-                                            <constraint firstAttribute="bottom" secondItem="CjD-wD-gK9" secondAttribute="bottom" id="riq-fg-ais"/>
-                                            <constraint firstItem="KNu-9V-PUd" firstAttribute="top" secondItem="KBA-id-tPm" secondAttribute="top" constant="100" id="uQc-k1-fVC"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                            </stackView>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="IMG" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xar-Gn-CcI">
+                                <rect key="frame" x="0.0" y="80" width="375" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="8nc-kF-Qix"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7s1-nV-P3T">
+                                <rect key="frame" x="20" y="540" width="335" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Fph-WO-bO5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="25"/>
+                                <state key="normal" title="Don't have an account?">
+                                    <color key="titleColor" name="log"/>
+                                </state>
+                                <connections>
+                                    <segue destination="iQX-iH-PuV" kind="show" id="Gr8-mA-Yzy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KNu-9V-PUd">
+                                <rect key="frame" x="20" y="440" width="335" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="SWs-ps-Y2L"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="25"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" name="log"/>
+                                </state>
+                                <connections>
+                                    <segue destination="c9F-YG-rRD" kind="show" id="cdB-2S-NM0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dH2-Ah-Oym"/>
                         <color key="backgroundColor" name="Cafe"/>
                         <constraints>
-                            <constraint firstItem="cdG-GZ-fcr" firstAttribute="leading" secondItem="Pwp-7L-ksM" secondAttribute="leading" id="237-bp-cJB"/>
-                            <constraint firstItem="cdG-GZ-fcr" firstAttribute="top" secondItem="Pwp-7L-ksM" secondAttribute="top" id="B1l-JW-Ewb"/>
-                            <constraint firstAttribute="trailing" secondItem="cdG-GZ-fcr" secondAttribute="trailing" id="dft-bP-MJy"/>
-                            <constraint firstAttribute="bottom" secondItem="cdG-GZ-fcr" secondAttribute="bottom" id="hg1-JX-rGf"/>
+                            <constraint firstItem="dH2-Ah-Oym" firstAttribute="trailing" secondItem="KNu-9V-PUd" secondAttribute="trailing" constant="20" id="1qd-YL-dmd"/>
+                            <constraint firstItem="xar-Gn-CcI" firstAttribute="trailing" secondItem="dH2-Ah-Oym" secondAttribute="trailing" id="FH6-nA-OT4"/>
+                            <constraint firstItem="xar-Gn-CcI" firstAttribute="leading" secondItem="dH2-Ah-Oym" secondAttribute="leading" id="Gex-Cq-Y3L"/>
+                            <constraint firstAttribute="trailing" secondItem="CjD-wD-gK9" secondAttribute="trailing" id="K2x-JL-Z53"/>
+                            <constraint firstItem="7s1-nV-P3T" firstAttribute="top" secondItem="KNu-9V-PUd" secondAttribute="bottom" constant="60" id="K6h-VF-JhC"/>
+                            <constraint firstItem="KNu-9V-PUd" firstAttribute="leading" secondItem="dH2-Ah-Oym" secondAttribute="leading" constant="20" id="M9B-tv-1tV"/>
+                            <constraint firstItem="7s1-nV-P3T" firstAttribute="leading" secondItem="dH2-Ah-Oym" secondAttribute="leading" constant="20" id="cIb-QQ-fuD"/>
+                            <constraint firstItem="xar-Gn-CcI" firstAttribute="top" secondItem="Pwp-7L-ksM" secondAttribute="top" constant="80" id="cPL-bz-2UZ"/>
+                            <constraint firstItem="dH2-Ah-Oym" firstAttribute="trailing" secondItem="7s1-nV-P3T" secondAttribute="trailing" constant="20" id="cqN-cu-aUP"/>
+                            <constraint firstAttribute="bottom" secondItem="CjD-wD-gK9" secondAttribute="bottom" id="gGR-tI-0o7"/>
+                            <constraint firstItem="CjD-wD-gK9" firstAttribute="leading" secondItem="Pwp-7L-ksM" secondAttribute="leading" id="gZC-27-6g0"/>
+                            <constraint firstItem="CjD-wD-gK9" firstAttribute="top" secondItem="Pwp-7L-ksM" secondAttribute="top" id="hir-yh-NFP"/>
+                            <constraint firstItem="KNu-9V-PUd" firstAttribute="top" secondItem="xar-Gn-CcI" secondAttribute="bottom" constant="60" id="hwS-qz-izq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Azc-3B-aEw"/>
@@ -1792,7 +1786,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" name="Cafe"/>
-                        <color key="selectedImageTintColor" name="top"/>
+                        <color key="selectedImageTintColor" name="log"/>
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="skb-44-vK7"/>
@@ -1984,7 +1978,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" name="Cafe"/>
-                        <color key="selectedImageTintColor" name="top"/>
+                        <color key="selectedImageTintColor" name="log"/>
                     </tabBar>
                     <connections>
                         <segue destination="1nQ-ep-ebQ" kind="relationship" relationship="viewControllers" id="5Je-IP-OPh"/>
