@@ -215,3 +215,4 @@ class EditViewController: UIViewController , UICollectionViewDelegate , UICollec
   
   
 }
+

@@ -563,8 +563,6 @@
                         <outlet property="descriptionCafe" destination="Hdr-xR-zm7" id="NL4-mj-VeR"/>
                         <outlet property="pageControl" destination="5oT-gX-ipv" id="geQ-yv-2YE"/>
                         <outlet property="photoCollecction" destination="dR4-i9-uOr" id="EAV-ik-xhw"/>
-                        <outlet property="scrollView" destination="C0k-x3-pQI" id="RLB-Ff-yCI"/>
-                        <outlet property="viewDis" destination="R3T-rp-eV7" id="hr0-MY-OPK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hzL-2v-MhO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
