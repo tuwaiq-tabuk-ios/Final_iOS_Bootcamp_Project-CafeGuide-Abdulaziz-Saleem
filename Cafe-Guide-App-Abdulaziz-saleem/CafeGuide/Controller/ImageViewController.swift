@@ -11,7 +11,8 @@ import AVFoundation
 import Firebase
 import SDWebImage
 
-class ImageViewController: UIViewController , UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout,UIScrollViewDelegate {
+
+class ImageViewController: UIViewController {
   
   //MARK: - Properties
   let synthesizer = AVSpeechSynthesizer()
@@ -21,25 +22,32 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
   var cellindex = 0
   var nameCoffe:String!
   
+  
   //MARK: - Outlet
   @IBOutlet weak var photoCollecction: UICollectionView!
   @IBOutlet weak var pageControl: UIPageControl!
   @IBOutlet weak var descriptionCafe: UILabel!
   @IBOutlet weak var Location: MKMapView!
-  @IBOutlet var scrollView: UIScrollView!
   @IBOutlet weak var coffeeDrinksCollecction: UICollectionView!
   
-
-  
-  //  var arrCanephora = [UIImage(named: "s5")!,UIImage(named: "s1")!,UIImage(named: "s4")!,UIImage(named: "s2")!,UIImage(named: "s3")!]
-  //  var arrDose = [UIImage(named: "d1")!,UIImage(named: "d6")!,UIImage(named: "d3")!,UIImage(named: "d7")!,UIImage(named: "d5")!]
-  //  var arrNorth = [UIImage(named: "n1")!,UIImage(named: "n2")!,UIImage(named: "n3")!,UIImage(named: "n4")!,UIImage(named: "n5")!]
-  //  var arrRATIO = [UIImage(named: "r1")!,UIImage(named: "r2")!,UIImage(named: "r3")!,UIImage(named: "r4")!,UIImage(named: "r5")!]
   
   
   
+  //MARK: - Action
+  @IBAction func reading(_ sender: UIButton) {
+    talk("\(arrPhoto.description!)")
+    
+  }
   
-  @IBOutlet weak var viewDis: UIView!
+  
+  @IBAction func instagramButton(_ sender: UIButton) {
+    
+    UIApplication.shared.open(URL(string: arrPhoto.instagram)!,
+                                 completionHandler: nil)
+    
+    
+  }
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -51,11 +59,6 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
     // Do any additional setup after loading the view.
   }
   
-  
-  @IBAction func reading(_ sender: UIButton) {
-    talk("\(arrPhoto.description!)")
-    
-  }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -71,16 +74,6 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
     annotation.coordinate = coords
     Location.addAnnotation(annotation)
     Location.mapType = .standard
-    //    print("~~ \(String(describing: nameCoffe))")
-    //    if nameCoffe == "Canephora" {
-    //      arrFhoto = arrCanephora
-    //    }else if nameCoffe == "Dose"{
-    //      arrFhoto = arrDose
-    //    }else if nameCoffe == "North"{
-    //      arrFhoto = arrNorth
-    //    }else if nameCoffe == "RATIO"{
-    //      arrFhoto = arrRATIO
-    //    }
     pageControl.numberOfPages = arrPhoto.imageCafe.count
     
     startTimer()
@@ -113,6 +106,25 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
                                   animated: true)
     pageControl.currentPage = cellindex
   }
+  
+  
+  func talk(_ string:String) {
+    let utterance = AVSpeechUtterance(string: string)
+    utterance.voice = AVSpeechSynthesisVoice(language: "en-ZA")
+    
+    if synthesizer.isSpeaking {
+      synthesizer.stopSpeaking(at: .immediate)
+      synthesizer.speak(utterance)
+    } else {
+      synthesizer.speak(utterance)
+    }
+  }
+  
+  
+  
+}
+//MARK: - UICollectionView
+extension  ImageViewController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout{
   
   
   func collectionView(_ collectionView: UICollectionView,
@@ -152,7 +164,6 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
   }
   
   
-  
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -181,32 +192,9 @@ class ImageViewController: UIViewController , UICollectionViewDelegate , UIColle
                       layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return 0.1
   }
-  
-  
-  func talk(_ string:String) {
-    let utterance = AVSpeechUtterance(string: string)
-    utterance.voice = AVSpeechSynthesisVoice(language: "en-ZA")
-    
-    if synthesizer.isSpeaking {
-      synthesizer.stopSpeaking(at: .immediate)
-      synthesizer.speak(utterance)
-    } else {
-      synthesizer.speak(utterance)
-    }
-  }
-  
-  
-  
-  
-  @IBAction func instagramButton(_ sender: UIButton) {
-    
-    UIApplication.shared.open(URL(string: arrPhoto.instagram)!,
-                                 completionHandler: nil)
-    
-    
-  }
-  
 }
+
+
 
 
 

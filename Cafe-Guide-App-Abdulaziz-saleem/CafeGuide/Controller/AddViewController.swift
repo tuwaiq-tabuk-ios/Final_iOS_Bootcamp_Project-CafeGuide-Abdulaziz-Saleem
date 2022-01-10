@@ -287,7 +287,7 @@ class AddViewController: UIViewController ,
 
 
         var bestImageData = [Data]()
-        var names = self.arrDrinkName
+        let names = self.arrDrinkName
 
         for image in self.arrDrinkImage {
               let data = image.jpegData(compressionQuality: 0.5)
@@ -367,7 +367,7 @@ extension AddViewController : UIImagePickerControllerDelegate , UINavigationCont
     alert.addAction(UIAlertAction(title: "cancel", style: .cancel, handler: nil))
     present(alert, animated: true, completion: nil)
   }
-  
+   
   
   func getimage(type:UIImagePickerController.SourceType){
     let pickerCount = UIImagePickerController()

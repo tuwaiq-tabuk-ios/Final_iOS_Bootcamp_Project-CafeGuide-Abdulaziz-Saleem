@@ -169,6 +169,7 @@ class CafeViewController: UIViewController , UISearchBarDelegate {
 
   }
   
+  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "showDeatil"{
     if let vc = segue.destination as? ImageViewController {
@@ -178,6 +179,7 @@ class CafeViewController: UIViewController , UISearchBarDelegate {
     }
     }
   }
+  
   
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
    
@@ -304,11 +306,6 @@ extension CafeViewController : UICollectionViewDelegate , UICollectionViewDataSo
             
           }
       
-      
-      
-     
-
-      
       return cell
       
     } else {
@@ -318,10 +315,6 @@ extension CafeViewController : UICollectionViewDelegate , UICollectionViewDataSo
       return cell
     }
   }
-  
-  
-  
-  
   
 }
 
