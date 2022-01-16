@@ -51,7 +51,7 @@ class AddViewController: UIViewController ,
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // type.delegate = self
+    
     pickerType.delegate = self
     pickerType.dataSource = self
     imageCollection.delegate = self
@@ -101,10 +101,8 @@ class AddViewController: UIViewController ,
   
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
-    //    print("~~ \(currentCoffe.shopName)")
     currentCoffe = nil
     arrimg.removeAll()
-    
     arrDrinkImage.removeAll()
     arrDrinkName.removeAll()
   }
@@ -125,9 +123,7 @@ class AddViewController: UIViewController ,
   @IBAction func addimageCafe(_ sender: UIButton) {
     bestCafe = false
     addFoto()
-    //    for name in self.arrDrinkName {
-    //      print("~~ \(name)")
-    //    }
+   
   }
   
   
@@ -166,6 +162,8 @@ class AddViewController: UIViewController ,
   }
   
   
+  //MARK: - Functions
+  
   func getImages() {
     
     arrimg.removeAll()
@@ -186,7 +184,7 @@ class AddViewController: UIViewController ,
     for bestCafe in currentCoffe.bestCafes {
       let imageView = UIImageView()
       imageView.sd_setImage(with: URL(string: bestCafe.imageDrinks)) { image, error, _, _ in
-        // self.arrDrink.append(["name" : bestCafe.nameDrinks,"image":image!])
+        
         self.arrDrinkName.append(bestCafe.nameDrinks)
         self.arrDrinkImage.append(image!)
         self.bestCafeCollection.reloadData()

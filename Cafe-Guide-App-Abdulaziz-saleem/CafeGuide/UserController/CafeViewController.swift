@@ -60,7 +60,7 @@ class CafeViewController: UIViewController {
   }
   
   
-  
+  //MARK: - Functions
   
   func getData() {
     let db = Firestore.firestore()
@@ -156,7 +156,7 @@ class CafeViewController: UIViewController {
     
     if cafeArray[index].isFavorite {
       cafeArray[index].isFavorite = false
-      //      db.collection("CafeGuide").document(cafeArray[index].id).setData(["isFavorite":false], merge: true)
+      
       db.collection("CafeFavorite").document(auth.uid).setData([cafeArray[index].id:FieldValue.arrayRemove([cafeArray[index].id!])], merge: true)
       collection.reloadData()
     } else {
@@ -271,7 +271,6 @@ extension CafeViewController : UICollectionViewDelegate , UICollectionViewDataSo
       
       collection.reloadData()
     }
-    //    print("~~ \(String(describing: currentCoffe))")
     return true
   }
   

@@ -33,6 +33,7 @@ class MainViewController: UIViewController {
   }
   
   
+  //MARK: - Functions
   
   func login(emailClear:String,
              passwordClear:String ) {

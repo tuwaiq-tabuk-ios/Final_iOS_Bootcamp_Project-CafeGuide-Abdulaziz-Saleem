@@ -63,7 +63,7 @@ class SignUpViewController: UIViewController {
   }
   
   
-  
+  //MARK: - Functions
   
   func sigUp() {
     

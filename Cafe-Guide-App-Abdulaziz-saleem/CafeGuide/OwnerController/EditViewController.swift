@@ -79,7 +79,8 @@ class EditViewController: UIViewController  {
     collectionCafe.reloadData()
     
   }
-  
+   
+  //MARK: - Functions
   
   func getData() {
     collectioRf.getDocuments(completion: { snapshot, error in
@@ -91,7 +92,7 @@ class EditViewController: UIViewController  {
         for Document in snapshot!.documents {
           let data = Document.data()
           
-          //    let data1:Dictionary = data["bestCafes"] as! Dictionary<String, Any>
+          
           var bestCafe:[BestCafe] = [BestCafe]()
           bestCafe.removeAll()
           for best in data["bestCafes"] as! [[String:Any]] {

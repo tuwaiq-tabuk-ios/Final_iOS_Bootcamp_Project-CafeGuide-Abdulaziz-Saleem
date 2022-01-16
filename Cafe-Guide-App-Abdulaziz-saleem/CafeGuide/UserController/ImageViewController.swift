@@ -89,6 +89,7 @@ class ImageViewController: UIViewController {
     
   }
   
+  //MARK: - Functions
   
   func startTimer(){
     timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveIndex), userInfo: nil, repeats: true)

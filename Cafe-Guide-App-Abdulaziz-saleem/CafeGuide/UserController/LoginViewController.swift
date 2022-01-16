@@ -44,6 +44,8 @@ class LoginViewController: UIViewController {
   }
   
   
+  //MARK: - Functions
+  
   func login(emailClear:String,
              passwordClear:String ) {
     Auth.auth().signIn(withEmail: emailClear,

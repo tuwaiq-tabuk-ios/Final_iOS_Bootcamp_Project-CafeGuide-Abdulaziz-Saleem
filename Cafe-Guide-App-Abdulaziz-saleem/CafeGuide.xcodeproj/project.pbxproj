@@ -27,7 +27,7 @@
 		8EAABFE3277DA59800A48C55 /* EditCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAABFE2277DA59800A48C55 /* EditCollectionViewCell.swift */; };
 		8EAABFE5277DA5C300A48C55 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAABFE4277DA5C300A48C55 /* EditViewController.swift */; };
 		8EAABFE7277DD19300A48C55 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAABFE6277DD19300A48C55 /* AddViewController.swift */; };
-		8EB16C002793F00200F2E517 /* AddBestCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB16BFF2793F00200F2E517 /* AddBestCafeCell.swift */; };
+		8EB16C022793FB3E00F2E517 /* AddBestCafeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB16C012793FB3E00F2E517 /* AddBestCafeCell.swift */; };
 		8ECFB3822773160F00E9251C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8ECFB3802773156D00E9251C /* GoogleService-Info.plist */; };
 		8ED703C9277455EC00DC9DF7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED703C8277455EC00DC9DF7 /* SignUpViewController.swift */; };
 		8EEC3C5D2768D2D6000011CF /* CoffeeDrinksCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEC3C5C2768D2D6000011CF /* CoffeeDrinksCollectionViewCell.swift */; };
@@ -65,7 +65,7 @@
 		8EAABFE2277DA59800A48C55 /* EditCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCollectionViewCell.swift; sourceTree = "<group>"; };
 		8EAABFE4277DA5C300A48C55 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		8EAABFE6277DD19300A48C55 /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
-		8EB16BFF2793F00200F2E517 /* AddBestCafeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddBestCafeCell.swift; path = "../../../Cafe-Guide-App-Abdulaziz-saleem 2/CafeGuide/cell/AddBestCafeCell.swift"; sourceTree = "<group>"; };
+		8EB16C012793FB3E00F2E517 /* AddBestCafeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddBestCafeCell.swift; path = "../../../../Cafe-Guide-App-Abdulaziz-saleem 2/CafeGuide/cell/AddBestCafeCell.swift"; sourceTree = "<group>"; };
 		8ECFB3802773156D00E9251C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8ED703C8277455EC00DC9DF7 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		8EEC3C5C2768D2D6000011CF /* CoffeeDrinksCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoffeeDrinksCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 				8E0B8359275F9D9200396E32 /* PhotoCollectionCell.swift */,
 				8E0B8353275F754300396E32 /* CategoriesLabelCell.swift */,
 				8EEC3C5C2768D2D6000011CF /* CoffeeDrinksCollectionViewCell.swift */,
-				8EB16BFF2793F00200F2E517 /* AddBestCafeCell.swift */,
+				8EB16C012793FB3E00F2E517 /* AddBestCafeCell.swift */,
 			);
 			path = Usercell;
 			sourceTree = "<group>";
@@ -342,7 +342,7 @@
 				8EF4DB4B277AFD8F00F87290 /* aboutTheAppVC.swift in Sources */,
 				8E0B833C275F428700396E32 /* AppDelegate.swift in Sources */,
 				8E0968A127744EF800A19D0A /* LoginViewController.swift in Sources */,
-				8EB16C002793F00200F2E517 /* AddBestCafeCell.swift in Sources */,
+				8EB16C022793FB3E00F2E517 /* AddBestCafeCell.swift in Sources */,
 				8EF4DB4D277B2DB800F87290 /* MainViewController.swift in Sources */,
 				8EF4DB47277AED2400F87290 /* dismissKeyboard.swift in Sources */,
 				8E0B833E275F428700396E32 /* SceneDelegate.swift in Sources */,

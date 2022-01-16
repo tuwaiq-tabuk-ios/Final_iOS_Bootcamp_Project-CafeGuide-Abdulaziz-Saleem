@@ -59,6 +59,7 @@ class favoriteViewController: UIViewController {
   }
   
   
+  //MARK: - Functions
   
   func getData()  {
     
