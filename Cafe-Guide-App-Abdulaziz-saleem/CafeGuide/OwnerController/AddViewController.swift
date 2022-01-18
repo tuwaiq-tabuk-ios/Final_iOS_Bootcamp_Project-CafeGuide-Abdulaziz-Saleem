@@ -46,7 +46,7 @@ class AddViewController: UIViewController ,
   @IBOutlet weak var addPhotoButton: UIButton!
   
   
-  // MARK: - Life Cycle
+  // MARK: - View controller Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()

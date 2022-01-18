@@ -30,7 +30,7 @@ class EditViewController: UIViewController  {
   
   
   
-  // MARK: - Life Cycle
+  // MARK: - View controller Life Cycle
   
   override func viewDidLoad() {
     

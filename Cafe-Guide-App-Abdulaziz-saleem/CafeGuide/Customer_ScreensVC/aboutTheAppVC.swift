@@ -15,7 +15,7 @@ class aboutTheAppVC: UIViewController {
   @IBOutlet weak var aboutTheAppTextView: UITextView!
   
   
-  // MARK: - Life Cycle
+  // MARK: - View controller Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()

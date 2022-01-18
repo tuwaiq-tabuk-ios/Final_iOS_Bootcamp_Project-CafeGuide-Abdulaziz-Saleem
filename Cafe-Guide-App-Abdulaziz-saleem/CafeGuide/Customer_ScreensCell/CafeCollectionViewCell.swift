@@ -16,7 +16,7 @@ class CafeCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var evaluationCafeILabel: UILabel!
   @IBOutlet weak var favoriteButton: UIButton!
   
-  //MARK: - Functions
+  // MARK: - Methods 
   
   func setupCell(photo:String ,
                  shopName:String ,

@@ -49,7 +49,7 @@ class ImageViewController: UIViewController {
     
   }
   
-  // MARK: - Life Cycle
+  // MARK: - View controller Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -89,7 +89,7 @@ class ImageViewController: UIViewController {
     
   }
   
-  //MARK: - Functions
+  // MARK: - Methods 
   
   func startTimer(){
     timer = Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(moveIndex), userInfo: nil, repeats: true)
