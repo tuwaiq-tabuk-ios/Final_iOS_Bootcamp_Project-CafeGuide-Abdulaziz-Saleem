@@ -27,7 +27,7 @@ class favoriteViewController: UIViewController {
   
   
   
-  // MARK: - Life Cycle
+  // MARK: - View controller Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -59,7 +59,7 @@ class favoriteViewController: UIViewController {
   }
   
   
-  //MARK: - Functions
+  // MARK: - Methods 
   
   func getData()  {
     

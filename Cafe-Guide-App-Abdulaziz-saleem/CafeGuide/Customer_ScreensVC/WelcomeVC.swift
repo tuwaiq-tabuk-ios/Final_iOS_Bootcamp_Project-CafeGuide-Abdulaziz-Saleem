@@ -10,7 +10,7 @@ import FirebaseAuth
 import Firebase
 
 
-class MainViewController: UIViewController {
+class WelcomeVC: UIViewController {
   
   //MARK: - IBOutlet
   
@@ -18,7 +18,7 @@ class MainViewController: UIViewController {
   @IBOutlet weak var signUpButton: UIButton!
   
   
-  // MARK: - Life Cycle
+  // MARK: - View controller Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()

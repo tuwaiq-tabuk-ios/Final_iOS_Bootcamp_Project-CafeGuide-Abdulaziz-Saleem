@@ -9,6 +9,7 @@ import UIKit
 
 
 class BestCafe :Equatable {
+  
   //MARK: - Properties
   
   let nameDrinks:String

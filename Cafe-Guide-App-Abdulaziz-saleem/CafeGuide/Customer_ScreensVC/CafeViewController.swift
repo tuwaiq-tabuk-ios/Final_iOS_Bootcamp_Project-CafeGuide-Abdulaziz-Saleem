@@ -29,7 +29,7 @@ class CafeViewController: UIViewController {
   @IBOutlet weak var searchCafe: UISearchBar!
   
   
-  // MARK: - Life Cycle
+  // MARK: - View controller Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -60,7 +60,7 @@ class CafeViewController: UIViewController {
   }
   
   
-  //MARK: - Functions
+  // MARK: - Methods 
   
   func getData() {
     let db = Firestore.firestore()

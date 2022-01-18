@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
   
   
   
-  // MARK: - Life Cycle
+  // MARK: - View controller Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -44,7 +44,7 @@ class LoginViewController: UIViewController {
   }
   
   
-  //MARK: - Functions
+  // MARK: - Methods 
   
   func login(emailClear:String,
              passwordClear:String ) {

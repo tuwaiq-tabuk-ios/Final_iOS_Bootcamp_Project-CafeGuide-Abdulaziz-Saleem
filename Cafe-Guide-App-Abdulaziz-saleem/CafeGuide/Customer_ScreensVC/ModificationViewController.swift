@@ -19,7 +19,7 @@ class ModificationViewController: UIViewController {
   @IBOutlet weak var lastNameTextField: UITextField!
   
   
-  // MARK: - Life Cycle
+  // MARK: - View controller Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()

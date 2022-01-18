@@ -17,7 +17,7 @@ class EditCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var deleteButton: UIButton!
   
   
-  //MARK: - Functions
+  // MARK: - Methods 
   
   func setupCell(photo:String ,
                  shopName:String ,

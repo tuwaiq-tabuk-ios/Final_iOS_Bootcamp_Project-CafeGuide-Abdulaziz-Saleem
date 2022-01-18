@@ -16,7 +16,7 @@ class ForgotYourPasswordVC: UIViewController {
   @IBOutlet weak var emailTextField: UITextField!
   
   
-  // MARK: - Life Cycle
+  // MARK: - View controller Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,7 +26,7 @@ class ForgotYourPasswordVC: UIViewController {
   }
   
   
-  //MARK: - Action
+  // MARK: - Methods 
   
   @IBAction func forgotYourPassword(_ sender: UIButton) {
     
