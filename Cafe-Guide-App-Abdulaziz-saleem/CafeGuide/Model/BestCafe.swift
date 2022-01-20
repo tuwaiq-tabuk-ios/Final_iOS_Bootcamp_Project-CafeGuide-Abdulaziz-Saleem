@@ -16,19 +16,18 @@ class BestCafe :Equatable {
   let imageDrinks:String
   var isFavorite:Bool!
   
-  static func == (lhs: BestCafe, rhs: BestCafe) -> Bool {
-    return lhs.nameDrinks == rhs.nameDrinks
-      && lhs.imageDrinks == rhs.imageDrinks
-      && lhs.isFavorite == rhs.isFavorite
-  }
-  
-  
-  
+
   init(nameDrinks:String,
        imageDrinks:String,
        isFavorite:Bool) {
     self.nameDrinks = nameDrinks
     self.imageDrinks = imageDrinks
     self.isFavorite = isFavorite
+  }
+  
+  static func == (lhs: BestCafe, rhs: BestCafe) -> Bool {
+    return lhs.nameDrinks == rhs.nameDrinks
+      && lhs.imageDrinks == rhs.imageDrinks
+      && lhs.isFavorite == rhs.isFavorite
   }
 }

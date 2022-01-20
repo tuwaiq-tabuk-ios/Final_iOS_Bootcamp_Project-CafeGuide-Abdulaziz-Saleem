@@ -33,7 +33,7 @@ class WelcomeVC: UIViewController {
   }
   
   
-  //MARK: - Functions
+  // MARK: - Methods
   
   func login(emailClear:String,
              passwordClear:String ) {
@@ -65,12 +65,12 @@ class WelcomeVC: UIViewController {
                               let storybord =  UIStoryboard(name: "Main",
                                                             bundle: nil)
                               if type == "owner"{
-                                let vc = storybord.instantiateViewController(withIdentifier: "owner")
+                                let vc = storybord.instantiateViewController(withIdentifier: "go-to-EditOwnerVC")
                                 vc.modalPresentationStyle = .overFullScreen
                                 self.present(vc, animated: true)
                                 
                               }else {
-                                let vc = storybord.instantiateViewController(identifier: "home")
+                                let vc = storybord.instantiateViewController(identifier: "go-to-CafeVC")
                                 vc.modalPresentationStyle = .overFullScreen
                                 self.present(vc, animated: true)
                                 

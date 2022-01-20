@@ -21,8 +21,9 @@ class AddViewController: UIViewController ,
   var arrimg:[UIImage] = []
   var arrDrinkImage:[UIImage] = []
   var arrDrinkName:[String] = []
+  var dicDrink: [[String:Any]] = []
   var currIndex = 0
-  var arrText = ["inside","outside"]
+  var arrText = ["Sitting inside","External request"]
   var pickerType = UIPickerView()
   var image:UIImage!
   var name:String!
@@ -103,8 +104,8 @@ class AddViewController: UIViewController ,
     super.viewDidDisappear(animated)
     currentCoffe = nil
     arrimg.removeAll()
-    arrDrinkImage.removeAll()
-    arrDrinkName.removeAll()
+    dicDrink.removeAll()
+    
   }
   
   
@@ -119,58 +120,56 @@ class AddViewController: UIViewController ,
   
   
   //MARK: - IBAction
-  
+  // Add an external image of the coffee.
   @IBAction func addimageCafe(_ sender: UIButton) {
     bestCafe = false
     addFoto()
-   
+    
   }
   
-  
+  // Add photos of cafe interior designs
   @IBAction func add(_ sender: UIButton) {
     getPhotos()
     
   }
   
+  // Add the best drinks.
   @IBAction func addBestCafe(_ sender: UIButton) {
     bestCafe = true
     addFoto()
     
   }
   
-  
+  // Save changes and send them to FireBase.
   @IBAction func saveCafe(_ sender: UIButton) {
     sendData()
   }
   
-  
+  // Delete from photos of cafe interiors
   @IBAction func deleteImage(_ sender:UIButton) {
     let index = sender.tag
-    
     arrimg.remove(at: index)
     imageCollection.reloadData()
   }
   
-  
+  // Delete the best drinks.
   @IBAction func DeleteBestDrink(_ sender:UIButton) {
     
     let index = sender.tag
     
-    arrDrinkName.remove(at: index)
-    arrDrinkImage.remove(at: index)
+    dicDrink.remove(at: index)
     bestCafeCollection.reloadData()
   }
   
   
-  //MARK: - Functions
+  // MARK: - Methods
   
   func getImages() {
     
     arrimg.removeAll()
-    arrDrinkImage.removeAll()
-    arrDrinkName.removeAll()
+    dicDrink.removeAll()
+    var i = 0
     for image in currentCoffe.imageCafe {
-      print("~~~ \(image)")
       
       let imageView = UIImageView()
       imageView.sd_setImage(with: URL(string: image)) { image, error, _, _ in
@@ -182,17 +181,15 @@ class AddViewController: UIViewController ,
     }
     
     for bestCafe in currentCoffe.bestCafes {
+      
+      
+      
       let imageView = UIImageView()
       imageView.sd_setImage(with: URL(string: bestCafe.imageDrinks)) { image, error, _, _ in
         
-        self.arrDrinkName.append(bestCafe.nameDrinks)
-        self.arrDrinkImage.append(image!)
+        let dic = ["nameDrinks":bestCafe.nameDrinks,"imageDrinks":image!] as [String : Any]
+        self.dicDrink.append(dic)
         self.bestCafeCollection.reloadData()
-        
-        print("~~ \n\n")
-        print("~~ \(bestCafe.imageDrinks)")
-        print("~~ \(bestCafe.nameDrinks)")
-        print("~~ \n\n")
         
       }
       
@@ -210,6 +207,7 @@ class AddViewController: UIViewController ,
   
   
   func sendData()  {
+    
     let db = Firestore.firestore()
     var documentID = ""
     if currentCoffe != nil {
@@ -231,11 +229,12 @@ class AddViewController: UIViewController ,
        "instagram":self.instagramTextField.text!,
        "bestCafes":[] as! [[String:Any]]
       ],merge: true) { error in
+      
       if let error = error {
         print("Error adding document:\(error)")
       }else{
-        var imageID = UUID().uuidString
         
+        var imageID = UUID().uuidString
         let storage = Storage.storage()
         let storageRF = storage.reference().child(documentID).child(imageID)
         
@@ -261,7 +260,6 @@ class AddViewController: UIViewController ,
           }
         }
         
-        
         var imagesData = [Data]()
         for image in self.arrimg {
           let data = image.jpegData(compressionQuality: 0.5)
@@ -282,7 +280,6 @@ class AddViewController: UIViewController ,
                   print("~~ error get url image: \(String(describing: error?.localizedDescription))")
                 } else {
                   imageURL.append(url!.absoluteString)
-                  //                  print("~~ \(imageURL)")
                   db.collection("CafeGuide").document(documentID).setData(
                     ["imageCafe":imageURL,
                     ],merge: true)
@@ -295,25 +292,21 @@ class AddViewController: UIViewController ,
         }
         
         
-        var bestImageData = [Data]()
-        let names = self.arrDrinkName
-        
-        for image in self.arrDrinkImage {
-          let data = image.jpegData(compressionQuality: 0.5)
-          bestImageData.append(data!)
-          
-        }
-        
         
         var array = [[String:Any]]()
         var i = 0
-        for image in bestImageData {
+        for image in self.dicDrink {
           
+          let dic = self.dicDrink[i]
+          i += 1
+          let image = dic["imageDrinks"] as! UIImage
+          let name = dic["nameDrinks"] as! String
+          let imageData = image.jpegData(compressionQuality: 0.5)
           
           imageID = UUID().uuidString
           let storageRF2 = storage.reference().child(documentID).child(imageID)
           
-          storageRF2.putData(image, metadata: uploadMetadata) { metadata, error in
+          storageRF2.putData(imageData!, metadata: uploadMetadata) { metadata, error in
             if error != nil {
               
             } else {
@@ -323,20 +316,19 @@ class AddViewController: UIViewController ,
                   
                 } else {
                   
-                  print("~~ \(names[i])")
-                  print("~~ \(url!.absoluteString)")
-                  print("~~ \n\n")
-                  
-                  array.append(["nameDrinks":names[i],"imageDrinks":url!.absoluteString])
+                  array.append(["nameDrinks":name,"imageDrinks":url!.absoluteString])
                   db.collection("CafeGuide").document(documentID).setData(
                     ["bestCafes":array
                     ],merge: true)
                   self.navigationController?.popViewController(animated: true)
-                  i += 1
+                  
                 }
               }
             }
           }
+          
+          
+          
           
         }
         
@@ -344,6 +336,9 @@ class AddViewController: UIViewController ,
     }
     
   }
+  
+  
+  
   
 }
 
@@ -393,10 +388,9 @@ extension AddViewController : UIImagePickerControllerDelegate , UINavigationCont
       
       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
         let textField = alert?.textFields![0]
+        let dic = ["nameDrinks":textField!.text!,"imageDrinks":image] as [String : Any]
+        self.dicDrink.append(dic)
         
-        self.arrDrinkName.append(textField!.text!)
-        self.arrDrinkImage.append(image)
-        print("~~\(self.arrDrinkName.count),\(self.arrDrinkImage.count)")
         self.bestCafeCollection.reloadData()
       }))
       
@@ -504,7 +498,7 @@ extension AddViewController:UICollectionViewDelegate ,
     if (collectionView == imageCollection ){
       return arrimg.count
     }else {
-      return arrDrinkImage.count
+      return dicDrink.count
     }
   }
   
@@ -519,10 +513,11 @@ extension AddViewController:UICollectionViewDelegate ,
       return cell
     } else {
       let cell = bestCafeCollection.dequeueReusableCell(withReuseIdentifier: "bestDrink",for: indexPath) as! AddBestCafeCell
-      
-      cell.imageBestDrink.image = arrDrinkImage[indexPath.row]
+      //      nameDrinks
+      //      imageDrinks
+      cell.imageBestDrink.image = dicDrink[indexPath.row]["imageDrinks"] as? UIImage
       cell.imageBestDrink.tag = indexPath.row
-      cell.nameDrinkLabel.text = arrDrinkName[indexPath.row]
+      cell.nameDrinkLabel.text = dicDrink[indexPath.row]["nameDrinks"] as? String
       cell.deleteDrinkButton.tag = indexPath.row
       return cell
     }

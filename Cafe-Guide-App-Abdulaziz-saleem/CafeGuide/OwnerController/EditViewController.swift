@@ -44,7 +44,7 @@ class EditViewController: UIViewController  {
     collectionCafe.layer.shadowRadius = 10
     filterdata = arrCafe
     hideKeyboardWhenTappedAround()
-    // Do any additional setup after loading the view.
+    
   }
   
   
@@ -56,30 +56,26 @@ class EditViewController: UIViewController  {
   
   
   //MARK: - IBAction
-  
+  // Show delete button
   @IBAction func edit(_ sender: UIButton) {
     edit.toggle()
     collectionCafe.reloadData()
   }
   
-  
+  // Remove the cafe from the program and the firebase.
   @IBAction func deleatButton(_ sender: UIButton) {
     
     let index = sender.tag
-    
     let ind = filterdata.firstIndex(of: filterdata[index])
     let ind2 = arrCafe.firstIndex(of: filterdata[index])
-    
     let db = Firestore.firestore()
-    
     db.collection("CafeGuide").document(filterdata[index].id).delete()
-    
     filterdata.remove(at: ind!)
     arrCafe.remove(at: ind2!)
     collectionCafe.reloadData()
     
   }
-   
+  
   //MARK: - Functions
   
   func getData() {
@@ -91,8 +87,6 @@ class EditViewController: UIViewController  {
         self.arrCafe.removeAll()
         for Document in snapshot!.documents {
           let data = Document.data()
-          
-          
           var bestCafe:[BestCafe] = [BestCafe]()
           bestCafe.removeAll()
           for best in data["bestCafes"] as! [[String:Any]] {
@@ -130,7 +124,7 @@ class EditViewController: UIViewController  {
         self.arrCafe = cafeArray
         self.filterdata = self.arrCafe
         self.collectionCafe.reloadData()
-        print("~~ \(cafeArray.count)")
+        
       }
     })
     

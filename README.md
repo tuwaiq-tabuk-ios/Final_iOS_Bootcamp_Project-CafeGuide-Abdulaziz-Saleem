@@ -36,3 +36,12 @@ For everyone, especially coffee lovers
 ● The user will find the instgram account of the cafe if they have one.
 
 ● The user will be able to hear the description instead of reading it. 
+
+
+## Owner stories
+
+● Create accounts and signin.
+
+● Create and modify profile information such as location, instagram address, if they have terrace, description, evaluation results taken from Google and a list of their products with their images.
+
+● Delete their cafe from the app in firestore back-end.

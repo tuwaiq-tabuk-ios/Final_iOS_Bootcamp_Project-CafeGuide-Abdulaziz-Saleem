@@ -11,17 +11,17 @@ import Firebase
 
 class FSUserManager {
   static let shared = FSUserManager()
-   
+  
   private init() {}
-   
+  
   private var email: String = ""
   private var pasword: String = ""
   private var pasword2: String = ""
   private var firstName: String = ""
   private var lastName: String = ""
-   
+  
   // MARK: - Register
-   
+  
   func signUpUserWith(
     email: String,
     password: String,
@@ -35,13 +35,14 @@ class FSUserManager {
     self.pasword2 = password2
     self.firstName = firstName
     self.lastName = lastName
-     
+    
+    
     Auth
       .auth()
       .createUser(withEmail: email,
                   password: password) { (authDataResult, error) in
         completion(error)
-         
+        
         if error != nil {
           print("DEBUG: Error: \(String(describing:error?.localizedDescription))")
           completion(error)

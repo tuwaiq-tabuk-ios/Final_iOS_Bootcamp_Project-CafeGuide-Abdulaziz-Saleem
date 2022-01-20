@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    errorLabel.alpha = 0
+    errorLabel.isHidden = true
     hideKeyboardWhenTappedAround()
     Colors.Design(emailTextField)
     Colors.Design(passwordTextField)
@@ -53,7 +53,7 @@ class LoginViewController: UIViewController {
                        completion:{
                         (authResult,error) in
                         if error != nil {
-                          self.errorLabel.alpha = 1
+                          self.errorLabel.isHidden = false
                           self.errorLabel.text = error?.localizedDescription
                           
                           
@@ -77,12 +77,12 @@ class LoginViewController: UIViewController {
                               let storybord =  UIStoryboard(name: "Main",
                                                             bundle: nil)
                               if type == "owner"{
-                                let vc = storybord.instantiateViewController(withIdentifier: "owner")
+                                let vc = storybord.instantiateViewController(withIdentifier: "go-to-EditOwnerVC")
                                 vc.modalPresentationStyle = .overFullScreen
                                 self.present(vc, animated: true)
                                 
                               }else {
-                                let vc = storybord.instantiateViewController(identifier: "home")
+                                let vc = storybord.instantiateViewController(identifier: "go-to-CafeVC")
                                 vc.modalPresentationStyle = .overFullScreen
                                 self.present(vc, animated: true)
                                 

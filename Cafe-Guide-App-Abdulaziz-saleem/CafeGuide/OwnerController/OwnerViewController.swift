@@ -22,10 +22,10 @@ class OwnerViewController: UIViewController {
   
   
   //MARK: - IBAction
-  
+  //Move to user page
   @IBAction func app(_ sender: UIButton) {
     let storybord =  UIStoryboard(name: "Main", bundle: nil)
-    let vc = storybord.instantiateViewController(identifier: "Cafe")
+    let vc = storybord.instantiateViewController(identifier: "go-to-ShowCafes")
     // vc.modalPresentationStyle = .overFullScreen
     self.present(vc, animated: true)
   }

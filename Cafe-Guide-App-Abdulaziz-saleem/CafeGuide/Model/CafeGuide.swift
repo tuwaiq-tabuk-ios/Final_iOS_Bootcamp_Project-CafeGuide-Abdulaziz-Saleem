@@ -12,20 +12,11 @@ import UIKit
 var arrayShopFaverote:[String] = [String]()
 var arrayBestCafeFaverote:[String] = [String]()
 var arrDrinkTow : [CafeGuide] = [CafeGuide]()
+var cafeArray:[CafeGuide] = [CafeGuide]()
+
 
 
 class CafeGuide :Equatable {
-  
-  static func == (lhs: CafeGuide, rhs: CafeGuide) -> Bool {
-    return lhs.photo == rhs.photo
-      && lhs.shopName == rhs.shopName
-      && lhs.evaluation == rhs.evaluation
-      && lhs.description == rhs.description
-      && lhs.locationCafe == rhs.locationCafe
-//     && lhs.bestCafes == rhs.bestCafes
-      && lhs.imageCafe == rhs.imageCafe
-      && lhs.isFavorite == rhs.isFavorite
-  }
   
   //MARK: - Properties
   
@@ -72,6 +63,16 @@ class CafeGuide :Equatable {
     self.instagram = instagram
   }
   
+  
+  static func == (lhs: CafeGuide, rhs: CafeGuide) -> Bool {
+    return lhs.photo == rhs.photo
+      && lhs.shopName == rhs.shopName
+      && lhs.evaluation == rhs.evaluation
+      && lhs.description == rhs.description
+      && lhs.locationCafe == rhs.locationCafe
+//     && lhs.bestCafes == rhs.bestCafes
+      && lhs.imageCafe == rhs.imageCafe
+      && lhs.isFavorite == rhs.isFavorite
+  }
 }
 
-var cafeArray:[CafeGuide] = [CafeGuide]()

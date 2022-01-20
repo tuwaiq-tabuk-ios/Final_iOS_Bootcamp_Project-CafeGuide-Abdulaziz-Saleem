@@ -7,16 +7,16 @@
 
 import Foundation
 import FirebaseFirestore
- 
- 
+
+
 enum FSCollectionReference: String {
   case users
 }
 // MARK: - Methods
 
 func getFSCollectionReference(
-_ collectionReference: FSCollectionReference
+  _ collectionReference: FSCollectionReference
 ) -> CollectionReference {
   return Firestore.firestore()
     .collection(collectionReference.rawValue)
-    }  
+}  

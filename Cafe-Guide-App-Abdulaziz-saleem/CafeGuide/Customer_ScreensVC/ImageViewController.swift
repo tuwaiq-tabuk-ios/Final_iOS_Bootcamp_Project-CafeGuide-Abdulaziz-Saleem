@@ -34,13 +34,13 @@ class ImageViewController: UIViewController {
   
   
   //MARK: - IBAction
-  
+  // Description Reader
   @IBAction func reading(_ sender: UIButton) {
     talk("\(arrPhoto.description!)")
     
   }
   
-  
+  // Go to the Instagram cafe page
   @IBAction func instagramButton(_ sender: UIButton) {
     
     UIApplication.shared.open(URL(string: arrPhoto.instagram)!,
@@ -53,20 +53,16 @@ class ImageViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    LocationMap.layer.maskedCorners = [.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
-    
+    LocationMap.layer.maskedCorners = [.layerMinXMaxYCorner,
+                                       .layerMaxXMaxYCorner]
     photoCollecction.layer.maskedCorners = [.layerMaxXMinYCorner,.layerMinXMinYCorner]
     coffeeDrinksCollecction.layer.shadowOpacity = 0.5
-    
-    // Do any additional setup after loading the view.
   }
   
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
     descriptionCafeLabel.text = arrPhoto.description
-    
     LocationMap.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: CLLocationDegrees(arrPhoto.locationCafe[0]),
                                                                             longitude: CLLocationDegrees(arrPhoto.locationCafe[1])), latitudinalMeters: CLLocationDistance(100), longitudinalMeters: CLLocationDistance(100)), animated: true)
     let coords = CLLocationCoordinate2DMake(CLLocationDegrees(arrPhoto.locationCafe[0]),

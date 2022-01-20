@@ -46,73 +46,73 @@ class SignUpViewController: UIViewController {
   
   // MARK: - Methods 
   
-private  func sigUp() {
+  private  func sigUp() {
+    
+    guard let lastName = lastNameTextField.text,
+          lastName.isEmpty == false else {
+      errorLabel.isHidden = false
+      errorLabel.text = "Fill in the last name"
+      return
+    }
+    
+    guard let firstName = firstNameTextField.text,
+          firstName.isEmpty == false else {
+      errorLabel.isHidden = false
+      errorLabel.text = "Fill in the first name"
+      return
+    }
     
     guard let email = emailTextField.text,
           email.isEmpty == false else {
-            errorLabel.isHidden = false
-            errorLabel.text = "Fill in the email"
-            return
-          }
-     
+      errorLabel.isHidden = false
+      errorLabel.text = "Fill in the email"
+      return
+    }
+    
     guard let password = passwordTextField.text,
           password.isEmpty == false else {
-            errorLabel.isHidden = false
-            errorLabel.text = "Enter the password"
-            return
-          }
-     guard let password2 = confirmPasswordTextField.text,
-           password2.isEmpty == false else {
-             errorLabel.isHidden = false
-             errorLabel.text = "Enter the password"
-             return
-           }
-     guard let firstName = firstNameTextField.text,
-              firstName.isEmpty == false else {
-                errorLabel.isHidden = false
-                errorLabel.text = "Fill in the first name"
-                return
-              }
-         
-        guard let lastName = lastNameTextField.text,
-              lastName.isEmpty == false else {
-                errorLabel.isHidden = false
-                errorLabel.text = "Fill in the last name"
-                return
-              }
+      errorLabel.isHidden = false
+      errorLabel.text = "Enter the password"
+      return
+    }
+    guard let password2 = confirmPasswordTextField.text,
+          password2.isEmpty == false else {
+      errorLabel.isHidden = false
+      errorLabel.text = "Enter the password"
+      return
+    }
     
- 
     
-  
+    
     if password == password2 {
-  
+      
       FSUserManager
-           .shared
-           .signUpUserWith(email: email,
-                           password: password,
-                           password2: password2,
-                           firstName: firstName,
-                           lastName: lastName) { error in
-             if error == nil {
-               // Navigation
-               let storybord =  UIStoryboard(name: "Main", bundle: nil)
-               let vc = storybord
-                 .instantiateViewController(identifier: "home")
-                
-               vc.modalPresentationStyle = .overFullScreen
-                
-               self.present(vc, animated: true)
-             } else {
-               self.errorLabel.isHidden = false
-               self.errorLabel.text = error?.localizedDescription
-             }
-           }
-    
-  
+        .shared
+        .signUpUserWith(email: email,
+                        password: password,
+                        password2: password2,
+                        firstName: firstName,
+                        lastName: lastName) { error in
+          if error == nil {
+            // Navigation
+            let storybord =  UIStoryboard(name: "Main", bundle: nil)
+            let vc = storybord
+              .instantiateViewController(identifier: "go-to-CafeVC")
+            
+            vc.modalPresentationStyle = .overFullScreen
+            
+            self.present(vc, animated: true)
+          } else {
+            self.errorLabel.isHidden = false
+            self.errorLabel.text = error?.localizedDescription
+          }
+        }
+      
+      
     } else {
       errorLabel.isHidden = false
       errorLabel.text = "Passwords Do Not Match"
     }
- 
+    
   }
 }

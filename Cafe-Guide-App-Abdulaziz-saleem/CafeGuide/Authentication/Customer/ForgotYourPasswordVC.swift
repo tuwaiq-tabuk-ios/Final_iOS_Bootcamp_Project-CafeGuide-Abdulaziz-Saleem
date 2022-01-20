@@ -26,7 +26,7 @@ class ForgotYourPasswordVC: UIViewController {
   }
   
   
-  // MARK: - Methods 
+  // MARK: - IBAction
   
   @IBAction func forgotYourPassword(_ sender: UIButton) {
     

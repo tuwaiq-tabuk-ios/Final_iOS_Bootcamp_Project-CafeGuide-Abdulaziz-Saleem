@@ -917,7 +917,7 @@
                                 </constraints>
                                 <color key="textColor" name="log"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yBG-d1-B0t"/>
@@ -1580,7 +1580,7 @@
         <!--Navigation Controller-->
         <scene sceneID="yZZ-6T-ENf">
             <objects>
-                <navigationController storyboardIdentifier="home" automaticallyAdjustsScrollViewInsets="NO" id="c6b-2m-Igs" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="go-to-CafeVC" automaticallyAdjustsScrollViewInsets="NO" id="c6b-2m-Igs" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="BlB-vr-Kmw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
@@ -1805,7 +1805,7 @@
         <!--CafeGuide-->
         <scene sceneID="Bob-84-q6l">
             <objects>
-                <tabBarController storyboardIdentifier="Cafe" automaticallyAdjustsScrollViewInsets="NO" id="61q-Lr-FFV" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="go-to-ShowCafes" automaticallyAdjustsScrollViewInsets="NO" id="61q-Lr-FFV" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="CafeGuide" id="qdM-Uf-ckA">
                         <barButtonItem key="backBarButtonItem" title="Back" id="bGa-xE-fOJ"/>
@@ -2020,7 +2020,7 @@
         <!--Item-->
         <scene sceneID="uYQ-yW-BoW">
             <objects>
-                <navigationController storyboardIdentifier="owner" automaticallyAdjustsScrollViewInsets="NO" id="fcd-Z3-V0k" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="go-to-EditOwnerVC" automaticallyAdjustsScrollViewInsets="NO" id="fcd-Z3-V0k" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="WZw-dY-KX2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="H5Y-nZ-FgA">
@@ -2115,7 +2115,7 @@
                                 </constraints>
                                 <color key="textColor" name="log"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NP9-sh-vyh"/>
@@ -2170,7 +2170,7 @@
         <segue reference="Yky-PC-Uph"/>
         <segue reference="O46-Gi-wxv"/>
         <segue reference="fFM-Uf-o7i"/>
-        <segue reference="y5w-BJ-9Ke"/>
+        <segue reference="L5w-le-OAM"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Color"/>
     <resources>
