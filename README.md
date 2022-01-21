@@ -46,9 +46,4 @@ For everyone, especially coffee lovers
 
 ● Delete their cafe from the app in firestore back-end.
 
-## App video
-
-
-https://user-images.githubusercontent.com/91871990/150349101-efa78866-319d-4fa0-bc77-2f3ce5487ae0.mp4
-
 
