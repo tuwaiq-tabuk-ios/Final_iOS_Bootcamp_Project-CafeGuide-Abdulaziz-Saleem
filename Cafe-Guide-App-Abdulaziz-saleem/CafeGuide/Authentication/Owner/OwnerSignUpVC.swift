@@ -92,10 +92,10 @@ class OwnerSignUpVC: UIViewController {
                         firstName: firstName,
                         lastName: lastName) { error in
           if error == nil {
-            // Navigation
+         
             let storybord =  UIStoryboard(name: "Main", bundle: nil)
             let vc = storybord
-              .instantiateViewController(identifier: "go-to-EditOwnerVC")
+              .instantiateViewController(identifier: Constants.K.OwnerViewController)
             
             vc.modalPresentationStyle = .overFullScreen
             

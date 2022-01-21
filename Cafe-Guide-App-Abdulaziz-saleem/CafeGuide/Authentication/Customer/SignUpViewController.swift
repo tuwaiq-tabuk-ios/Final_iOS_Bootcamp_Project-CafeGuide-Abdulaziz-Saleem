@@ -97,7 +97,7 @@ class SignUpViewController: UIViewController {
             // Navigation
             let storybord =  UIStoryboard(name: "Main", bundle: nil)
             let vc = storybord
-              .instantiateViewController(identifier: "go-to-CafeVC")
+              .instantiateViewController(identifier: Constants.K.CafeViewController)
             
             vc.modalPresentationStyle = .overFullScreen
             

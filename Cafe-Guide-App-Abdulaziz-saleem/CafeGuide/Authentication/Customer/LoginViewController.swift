@@ -77,12 +77,12 @@ class LoginViewController: UIViewController {
                               let storybord =  UIStoryboard(name: "Main",
                                                             bundle: nil)
                               if type == "owner"{
-                                let vc = storybord.instantiateViewController(withIdentifier: "go-to-EditOwnerVC")
+                                let vc = storybord.instantiateViewController(withIdentifier: Constants.K.OwnerViewController)
                                 vc.modalPresentationStyle = .overFullScreen
                                 self.present(vc, animated: true)
                                 
                               }else {
-                                let vc = storybord.instantiateViewController(identifier: "go-to-CafeVC")
+                                let vc = storybord.instantiateViewController(identifier: Constants.K.CafeViewController)
                                 vc.modalPresentationStyle = .overFullScreen
                                 self.present(vc, animated: true)
                                 
