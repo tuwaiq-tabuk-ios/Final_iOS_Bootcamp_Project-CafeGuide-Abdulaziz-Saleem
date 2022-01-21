@@ -45,5 +45,3 @@ For everyone, especially coffee lovers
 ● Create and modify profile information such as location, instagram address, if they have terrace, description, evaluation results taken from Google and a list of their products with their images.
 
 ● Delete their cafe from the app in firestore back-end.
-
-
