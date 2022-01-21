@@ -23,7 +23,7 @@ class OwnerViewController: UIViewController {
   
   //MARK: - IBAction
   //Move to user page
-  @IBAction func app(_ sender: UIButton) {
+  @IBAction func appPressed(_ sender: UIButton) {
     let storybord =  UIStoryboard(name: "Main", bundle: nil)
     let vc = storybord.instantiateViewController(identifier: "go-to-ShowCafes")
     // vc.modalPresentationStyle = .overFullScreen
@@ -31,7 +31,7 @@ class OwnerViewController: UIViewController {
   }
   
   
-  @IBAction func logOut(_ sender: UIButton) {
+  @IBAction func logOutPressed(_ sender: UIButton) {
     let auth = Auth.auth()
     
     do {

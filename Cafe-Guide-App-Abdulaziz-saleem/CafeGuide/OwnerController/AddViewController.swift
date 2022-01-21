@@ -121,39 +121,39 @@ class AddViewController: UIViewController ,
   
   //MARK: - IBAction
   // Add an external image of the coffee.
-  @IBAction func addimageCafe(_ sender: UIButton) {
+  @IBAction func addimageCafePressed(_ sender: UIButton) {
     bestCafe = false
     addFoto()
     
   }
   
   // Add photos of cafe interior designs
-  @IBAction func add(_ sender: UIButton) {
+  @IBAction func addPressed(_ sender: UIButton) {
     getPhotos()
     
   }
   
   // Add the best drinks.
-  @IBAction func addBestCafe(_ sender: UIButton) {
+  @IBAction func addBestCafePressed(_ sender: UIButton) {
     bestCafe = true
     addFoto()
     
   }
   
   // Save changes and send them to FireBase.
-  @IBAction func saveCafe(_ sender: UIButton) {
+  @IBAction func saveCafePressed(_ sender: UIButton) {
     sendData()
   }
   
   // Delete from photos of cafe interiors
-  @IBAction func deleteImage(_ sender:UIButton) {
+  @IBAction func deleteImagePressed(_ sender:UIButton) {
     let index = sender.tag
     arrimg.remove(at: index)
     imageCollection.reloadData()
   }
   
   // Delete the best drinks.
-  @IBAction func DeleteBestDrink(_ sender:UIButton) {
+  @IBAction func DeleteBestDrinkPressed(_ sender:UIButton) {
     
     let index = sender.tag
     
@@ -512,7 +512,7 @@ extension AddViewController:UICollectionViewDelegate ,
       cell.deleteImagesButton.tag = indexPath.row
       return cell
     } else {
-      let cell = bestCafeCollection.dequeueReusableCell(withReuseIdentifier: "bestDrink",for: indexPath) as! AddBestCafeCell
+      let cell = bestCafeCollection.dequeueReusableCell(withReuseIdentifier: "bestDrink",for: indexPath) as! AddBestCafeCell2
       //      nameDrinks
       //      imageDrinks
       cell.imageBestDrink.image = dicDrink[indexPath.row]["imageDrinks"] as? UIImage

@@ -47,7 +47,7 @@ class ModificationViewController: UIViewController {
   
   //MARK: - IBAction
   // saving information
-  @IBAction func save(_ sender: Any) {
+  @IBAction func savePressed(_ sender: UIButton) {
     
     let db = Firestore.firestore()
     let userID = Auth.auth().currentUser?.uid

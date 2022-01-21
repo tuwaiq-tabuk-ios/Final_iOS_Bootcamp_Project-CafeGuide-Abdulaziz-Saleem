@@ -38,7 +38,7 @@ class SignUpViewController: UIViewController {
   
   //MARK: - IBAction
   
-  @IBAction func signUp(_ sender: UIButton) {
+  @IBAction func signUpPressed(_ sender: UIButton) {
     
     sigUp()
   }

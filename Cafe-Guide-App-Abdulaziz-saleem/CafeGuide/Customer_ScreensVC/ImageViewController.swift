@@ -35,13 +35,13 @@ class ImageViewController: UIViewController {
   
   //MARK: - IBAction
   // Description Reader
-  @IBAction func reading(_ sender: UIButton) {
+  @IBAction func readingPressed(_ sender: UIButton) {
     talk("\(arrPhoto.description!)")
     
   }
   
   // Go to the Instagram cafe page
-  @IBAction func instagramButton(_ sender: UIButton) {
+  @IBAction func instagramPressed(_ sender: UIButton) {
     
     UIApplication.shared.open(URL(string: arrPhoto.instagram)!,
                               completionHandler: nil)

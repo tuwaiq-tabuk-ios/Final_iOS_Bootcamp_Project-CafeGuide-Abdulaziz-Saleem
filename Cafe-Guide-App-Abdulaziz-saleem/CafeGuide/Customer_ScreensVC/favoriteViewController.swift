@@ -43,7 +43,7 @@ class favoriteViewController: UIViewController {
   
   //MARK: - IBAction
   // Cafe Preference
-  @IBAction func favourites(_ sender: UIButton) {
+  @IBAction func favouritesPressed(_ sender: UIButton) {
     let index = sender.tag
     let db = Firestore.firestore()
     let userID = Auth.auth().currentUser?.uid

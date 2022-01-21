@@ -57,13 +57,13 @@ class EditViewController: UIViewController  {
   
   //MARK: - IBAction
   // Show delete button
-  @IBAction func edit(_ sender: UIButton) {
+  @IBAction func editPressed(_ sender: UIButton) {
     edit.toggle()
     collectionCafe.reloadData()
   }
   
   // Remove the cafe from the program and the firebase.
-  @IBAction func deleatButton(_ sender: UIButton) {
+  @IBAction func deleatPressed(_ sender: UIButton) {
     
     let index = sender.tag
     let ind = filterdata.firstIndex(of: filterdata[index])

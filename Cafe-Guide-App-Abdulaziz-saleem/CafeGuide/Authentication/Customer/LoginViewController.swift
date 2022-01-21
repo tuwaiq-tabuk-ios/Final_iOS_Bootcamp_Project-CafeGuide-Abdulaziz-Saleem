@@ -36,7 +36,7 @@ class LoginViewController: UIViewController {
   
   //MARK: - IBAction
   
-  @IBAction func Login(_ sender: UIButton) {
+  @IBAction func LoginPressed(_ sender: UIButton) {
     
     let emailClear = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
     let passwordClear = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
