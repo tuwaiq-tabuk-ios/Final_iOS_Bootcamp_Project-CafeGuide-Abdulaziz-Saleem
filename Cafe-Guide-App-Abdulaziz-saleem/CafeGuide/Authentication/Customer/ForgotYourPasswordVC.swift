@@ -26,9 +26,9 @@ class ForgotYourPasswordVC: UIViewController {
   }
   
   
-  // MARK: - Methods 
+  // MARK: - IBAction
   
-  @IBAction func forgotYourPassword(_ sender: UIButton) {
+  @IBAction func forgotYourPasswordPressed(_ sender: UIButton) {
     
     let auth = Auth.auth()
     auth.sendPasswordReset(withEmail: emailTextField.text!) { (error) in

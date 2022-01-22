@@ -21,7 +21,7 @@ class logOutViewController: UIViewController {
   
   //MARK: - IBAction
   
-  @IBAction func logOut(_ sender: UIButton) {
+  @IBAction func logOutPressed(_ sender: UIButton) {
     let auth = Auth.auth()
     
     do {
@@ -30,7 +30,7 @@ class logOutViewController: UIViewController {
       UserDefaults.standard.removeObject(forKey: "password")
       UserDefaults.standard.synchronize()
       let storybord =  UIStoryboard(name: "Main", bundle: nil)
-      let vc = storybord.instantiateViewController(identifier: "Main")
+      let vc = storybord.instantiateViewController(identifier: Constants.K.WelcomeVC)
       vc.modalPresentationStyle = .overFullScreen
       self.present(vc, animated: true)
     } catch let signOutError {

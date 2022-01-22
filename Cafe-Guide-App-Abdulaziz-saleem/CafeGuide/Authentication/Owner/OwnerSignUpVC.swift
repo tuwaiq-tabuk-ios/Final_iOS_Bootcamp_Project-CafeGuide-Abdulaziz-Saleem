@@ -11,7 +11,7 @@ import FirebaseAuth
 
 
 class OwnerSignUpVC: UIViewController {
-
+  
   @IBOutlet weak var firstNameTextField: UITextField!
   @IBOutlet weak var lastNameTextField: UITextField!
   @IBOutlet weak var emailTextField: UITextField!
@@ -36,82 +36,81 @@ class OwnerSignUpVC: UIViewController {
   
   //MARK: - IBAction
   
-  @IBAction func signUp(_ sender: UIButton) {
+  @IBAction func signUpPressed(_ sender: UIButton) {
     
     
     sigUp()
   }
   
   
-  //MARK: - Functions
+  // MARK: - Methods
   
   private  func sigUp() {
-      
-      guard let email = emailTextField.text,
-            email.isEmpty == false else {
-              errorLabel.isHidden = false
-              errorLabel.text = "Fill in the email"
-              return
-            }
-       
-      guard let password = passwordTextField.text,
-            password.isEmpty == false else {
-              errorLabel.isHidden = false
-              errorLabel.text = "Enter the password"
-              return
-            }
-       guard let password2 = confirmPasswordTextField.text,
-             password2.isEmpty == false else {
-               errorLabel.isHidden = false
-               errorLabel.text = "Enter the password"
-               return
-             }
-       guard let firstName = firstNameTextField.text,
-                firstName.isEmpty == false else {
-                  errorLabel.isHidden = false
-                  errorLabel.text = "Fill in the first name"
-                  return
-                }
-           
-          guard let lastName = lastNameTextField.text,
-                lastName.isEmpty == false else {
-                  errorLabel.isHidden = false
-                  errorLabel.text = "Fill in the last name"
-                  return
-                }
-      
-   
-      
     
-      if password == password2 {
-    
-        FSOwnerManager
-             .shared
-             .signUpUserWith(email: email,
-                             password: password,
-                             password2: password2,
-                             firstName: firstName,
-                             lastName: lastName) { error in
-               if error == nil {
-                 // Navigation
-                 let storybord =  UIStoryboard(name: "Main", bundle: nil)
-                 let vc = storybord
-                   .instantiateViewController(identifier: "owner")
-                  
-                 vc.modalPresentationStyle = .overFullScreen
-                  
-                 self.present(vc, animated: true)
-               } else {
-                 self.errorLabel.isHidden = false
-                 self.errorLabel.text = error?.localizedDescription
-               }
-             }
-      
-    
-      } else {
-        errorLabel.isHidden = false
-        errorLabel.text = "Passwords Do Not Match"
-      }
-   
+    guard let firstName = firstNameTextField.text,
+          firstName.isEmpty == false else {
+      errorLabel.isHidden = false
+      errorLabel.text = "Fill in the first name"
+      return
     }
+    
+    guard let lastName = lastNameTextField.text,
+          lastName.isEmpty == false else {
+      errorLabel.isHidden = false
+      errorLabel.text = "Fill in the last name"
+      return
+    }
+    
+    guard let email = emailTextField.text,
+          email.isEmpty == false else {
+      errorLabel.isHidden = false
+      errorLabel.text = "Fill in the email"
+      return
+    }
+    
+    guard let password = passwordTextField.text,
+          password.isEmpty == false else {
+      errorLabel.isHidden = false
+      errorLabel.text = "Enter the password"
+      return
+    }
+    guard let password2 = confirmPasswordTextField.text,
+          password2.isEmpty == false else {
+      errorLabel.isHidden = false
+      errorLabel.text = "Enter the password"
+      return
+    }
+    
+    
+    if password == password2 {
+      
+      FSOwnerManager
+        .shared
+        .signUpUserWith(email: email,
+                        password: password,
+                        password2: password2,
+                        firstName: firstName,
+                        lastName: lastName) { error in
+          if error == nil {
+         
+            let storybord =  UIStoryboard(name: "Main", bundle: nil)
+            let vc = storybord
+              .instantiateViewController(identifier: Constants.K.OwnerViewController)
+            
+            vc.modalPresentationStyle = .overFullScreen
+            
+            self.present(vc, animated: true)
+          } else {
+            self.errorLabel.isHidden = false
+            self.errorLabel.text = error?.localizedDescription
+          }
+        }
+      
+      
+    } else {
+      errorLabel.isHidden = false
+      errorLabel.text = "Passwords Do Not Match"
+    }
+    
   }
+}

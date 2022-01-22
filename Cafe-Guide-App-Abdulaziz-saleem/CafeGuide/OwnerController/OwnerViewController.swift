@@ -22,16 +22,16 @@ class OwnerViewController: UIViewController {
   
   
   //MARK: - IBAction
-  
-  @IBAction func app(_ sender: UIButton) {
+  //Move to user page
+  @IBAction func appPressed(_ sender: UIButton) {
     let storybord =  UIStoryboard(name: "Main", bundle: nil)
-    let vc = storybord.instantiateViewController(identifier: "Cafe")
+    let vc = storybord.instantiateViewController(identifier: Constants.K.CafeViewController)
     // vc.modalPresentationStyle = .overFullScreen
     self.present(vc, animated: true)
   }
   
   
-  @IBAction func logOut(_ sender: UIButton) {
+  @IBAction func logOutPressed(_ sender: UIButton) {
     let auth = Auth.auth()
     
     do {
@@ -40,7 +40,7 @@ class OwnerViewController: UIViewController {
       UserDefaults.standard.removeObject(forKey: "password")
       UserDefaults.standard.synchronize()
       let storybord =  UIStoryboard(name: "Main", bundle: nil)
-      let vc = storybord.instantiateViewController(identifier: "Main")
+      let vc = storybord.instantiateViewController(identifier: Constants.K.WelcomeVC)
       vc.modalPresentationStyle = .overFullScreen
       self.present(vc, animated: true)
     } catch let signOutError {
