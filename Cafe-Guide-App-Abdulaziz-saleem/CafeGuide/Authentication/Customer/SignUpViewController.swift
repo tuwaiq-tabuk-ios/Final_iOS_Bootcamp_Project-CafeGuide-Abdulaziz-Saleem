@@ -48,6 +48,13 @@ class SignUpViewController: UIViewController {
   
   private  func sigUp() {
     
+    guard let firstName = firstNameTextField.text,
+          firstName.isEmpty == false else {
+      errorLabel.isHidden = false
+      errorLabel.text = "Fill in the first name"
+      return
+    }
+    
     guard let lastName = lastNameTextField.text,
           lastName.isEmpty == false else {
       errorLabel.isHidden = false
@@ -55,12 +62,7 @@ class SignUpViewController: UIViewController {
       return
     }
     
-    guard let firstName = firstNameTextField.text,
-          firstName.isEmpty == false else {
-      errorLabel.isHidden = false
-      errorLabel.text = "Fill in the first name"
-      return
-    }
+   
     
     guard let email = emailTextField.text,
           email.isEmpty == false else {
